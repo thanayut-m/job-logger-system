@@ -2,12 +2,22 @@ import { useForm } from "react-hook-form"
 import AuthLayouts from "../Layouts/AuthLayouts"
 import FormInput from "../components/FormInput";
 import Buttons from "../components/Buttons";
+import { zodResolver } from './../../node_modules/@hookform/resolvers/zod/src/zod';
+import { signUpSchema } from "../utils/Schema";
+
+
 
 const SignUp = () => {
-    const { register, handleSubmit, formState } = useForm();
+    const { register, handleSubmit, formState } = useForm({
+        resolver: zodResolver(signUpSchema)
+    });
 
-    const { isSubmitting } = formState;
-    console.log(isSubmitting);
+
+
+    const { errors, isSubmitting } = formState;
+    console.log(isSubmitting, errors);
+
+
 
     const handleSignUp = async (data) => {
         await new Promise((resolve) => setTimeout(resolve, 1000))
@@ -27,6 +37,7 @@ const SignUp = () => {
                             name="first_name"
                             type="text"
                             placeholder="First Name..."
+                            errors={errors}
                         />
                         <FormInput
                             textname="นามสกุล"
@@ -34,6 +45,7 @@ const SignUp = () => {
                             name="last_name"
                             type="text"
                             placeholder="Last Name..."
+                            errors={errors}
                         />
                     </div>
                     <div className="mt-3">
@@ -43,6 +55,7 @@ const SignUp = () => {
                             name="username"
                             type="text"
                             placeholder="Username..."
+                            errors={errors}
                         />
                     </div>
                     <div className="grid grid-cols-2 max-md:grid-cols-1 gap-2 mt-3">
@@ -52,6 +65,7 @@ const SignUp = () => {
                             name="password"
                             type="password"
                             placeholder="Password..."
+                            errors={errors}
                         />
                         <FormInput
                             textname="ยืนยันรหัสผ่าน"
@@ -59,6 +73,7 @@ const SignUp = () => {
                             name="password_confirmation"
                             type="text"
                             placeholder="Confirm Password..."
+                            errors={errors}
                         />
                     </div>
 

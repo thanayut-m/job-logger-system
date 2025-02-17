@@ -4,9 +4,10 @@ const FormInput = ({
     register,
     name,
     placeholder,
-    type,
+    type = "text",
     textname,
-    id
+    id,
+    errors = {}
 }) => {
     return (
         <fieldset className="fieldset">
@@ -21,8 +22,11 @@ const FormInput = ({
                 id={id || name}
                 type={type}
                 placeholder={placeholder}
-                className="input input-neutral bg-white text-black w-full"
+                className={`${errors[name] ? " border-red-500" : "input input-neutral"} bg-white text-black w-full`}
             />
+            {
+                errors[name] && (<p className="text-red-500 font-bold text-sm -mb-2">{errors[name].message}</p>)
+            }
         </fieldset>
     )
 }
@@ -33,6 +37,7 @@ FormInput.propTypes = {
     placeholder: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     textname: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    errors: PropTypes.func.isRequired
 }
 export default FormInput
