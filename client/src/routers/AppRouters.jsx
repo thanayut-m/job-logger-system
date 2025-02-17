@@ -1,26 +1,17 @@
-import { Route, Routes } from "react-router"
+import { Routes, Route } from "react-router";
 import PublicRouters from "./publicRouters"
-// import PersonRouters from "./PersonRouters"
 
-// import AdminRouters from "./AdminRouters"
+import PrivateRouters from "./PrivateRouters";
 
 const AppRouters = () => {
     return (
         <>
-            AppRouters
             <Routes>
                 {/* Public Page */}
                 <Route path="/*" element={<PublicRouters />} />
 
                 {/* Private Page */}
-                {/* <Route path="/private"> */}
-
-                {/* Router User */}
-                {/* <Route path="" element={<PersonRouters />} /> */}
-
-                {/* Router Admin */}
-                {/* <Route path="" element={<AdminRouters />} /> */}
-                {/* </Route> */}
+                <Route path="/private/*" element={<PrivateRouters />} />
 
             </Routes>
         </>

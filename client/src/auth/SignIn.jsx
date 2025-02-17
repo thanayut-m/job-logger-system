@@ -1,6 +1,12 @@
+import AuthLayouts from './../Layouts/AuthLayouts';
+
 const SignIn = () => {
+
     return (
-        <div>SignIn</div>
+
+        <AuthLayouts>
+            asdasdasdasd
+        </AuthLayouts>
     )
 }
 export default SignIn
