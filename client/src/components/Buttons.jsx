@@ -9,11 +9,11 @@ const Buttons = ({
         <button
             type={type}
             disabled={isSubmitting}
-            className="btn btn-primary w-full">
+            className="bg-blue-600 hover:bg-blue-400 p-2 rounded-xl w-full opacity-100">
             {
                 isSubmitting
-                    ? <span>Please wait...</span>
-                    : <span>{text}</span>
+                    ? <p className="font-bold">Please wait...</p>
+                    : <p>{text}</p>
             }
         </button>
     )
