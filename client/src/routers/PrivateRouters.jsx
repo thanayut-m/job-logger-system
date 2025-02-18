@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router";
 import Dashboard from "../pages/Dashboard";
+import ManageUser from "../pages/Admin/Manage-User";
 
 const PrivateRouters = () => {
     return (
@@ -9,7 +10,7 @@ const PrivateRouters = () => {
                 <Route path="dashboard" element={<Dashboard />} />
 
                 {/* admin */}
-                <Route path="manage-user" element="manage-user" />
+                <Route path="manage-user" element={<ManageUser />} />
             </Routes>
         </div>
     )

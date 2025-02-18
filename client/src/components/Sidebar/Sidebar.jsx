@@ -1,16 +1,23 @@
+import Drawer from "./Drawer"
+import { AiOutlineDashboard } from "react-icons/ai";
+import { FaUserCog } from "react-icons/fa";
+import SidebarDashboardLink from "./SidebarDashboardLink";
+
 const Sidebar = () => {
     return (
-        <div className="drawer">
-            <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-side">
-                <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                    {/* Sidebar content here */}
-                    <li><a>Sidebar Item 1</a></li>
-                    <li><a>Sidebar Item 2</a></li>
-                </ul>
-            </div>
-        </div>
+        <Drawer>
+            <SidebarDashboardLink
+                to="/private/dashboard"
+                Icon={AiOutlineDashboard}
+                textName="Dashboard"
+            />
+            <SidebarDashboardLink
+                to="/private/manage-user"
+                Icon={FaUserCog}
+                textName="ตั้งค่าผู้ใช้"
+            />
+        </Drawer>
+
     )
 }
 export default Sidebar
