@@ -8,7 +8,7 @@ const PrivateLayouts = ({ children }) => {
         <div>
             <Navbar />
             <Sidebar />
-            <main className='bg-amber-100 '>
+            <main className='bg-amber-100 px-4 py-4'>
                 {children}
             </main>
         </div>

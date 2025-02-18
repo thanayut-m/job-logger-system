@@ -10,7 +10,7 @@ const SidebarDashboardLink = ({
         <li>
             <Link to={to}>
                 <Icon className="text-xl" />
-                <a className="text-lg py-3">
+                <a className="text-lg py-2">
                     {textName}
                 </a>
             </Link>

@@ -3,7 +3,25 @@ import PrivateLayouts from "../Layouts/PrivateLayouts"
 const Dashboard = () => {
     return (
         <PrivateLayouts>
-            <div>Dashboard Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique harum accusantium consectetur dicta laudantium molestias, ea non? Quibusdam at accusamus, architecto possimus, vitae dolore delectus, maiores commodi aspernatur sit quos. lorem*1000</div>
+            <div className="flex flex-col gap-3">
+                <div className="bg-white rounded-xl shadow-2xl flex justify-between p-3">
+                    <div >
+                        Dashboard
+                    </div>
+                    <div className="flex gap-6" >
+                        <div>ตั้งแต่</div>
+                        <div>สิ้นสุด</div>
+                        <div>ค้นหา</div>
+                        <div>โรงพยาบาล</div>
+                        <div></div>
+                    </div>
+                </div>
+                <div className="bg-white rounded-xl shadow-2xl">
+                    <div className="p-3">
+                        sadjkhfakjsdflkajs;dlfk';asdlkflhjasdifklk;m;lk
+                    </div>
+                </div>
+            </div>
         </PrivateLayouts>
     )
 }
