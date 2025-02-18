@@ -22,7 +22,7 @@ const FormInput = ({
                 id={id || name}
                 type={type}
                 placeholder={placeholder}
-                className={`${errors[name] ? " border-red-500" : "input input-neutral"} bg-white text-black w-full`}
+                className={`${errors[name] ? " input input-error" : "input input-neutral"} bg-white text-black w-full`}
             />
             {
                 errors[name] && (<p className="text-red-500 font-bold text-sm -mb-2">{errors[name].message}</p>)

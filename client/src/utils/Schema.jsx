@@ -12,3 +12,9 @@ export const signUpSchema = z.object({
         message: "รหัสผ่านไม่ตรงกัน",
         path: ["password_confirmation"]
     })
+
+
+export const signinSchema = z.object({
+    username: z.string().min(1, "กรุณากรอกชื่อผู้ใช้"),
+    password: z.string().min(6, "กรุณากรอกรหัสผ่าน")
+})
