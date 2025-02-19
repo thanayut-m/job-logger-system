@@ -16,7 +16,7 @@ const Dashboard = () => {
     return (
         <PrivateLayouts>
             <div className="flex flex-col gap-3">
-                <div className="bg-white rounded-xl shadow-2xl p-3 grid grid-cols-6 gap-1 text-center ">
+                <div className="bg-white rounded-xl shadow-2xl p-3 grid grid-cols-6 gap-3 text-center ">
                     <div>
                         <p className="text-4xl font-semibold">To-Do List</p>
                     </div>
