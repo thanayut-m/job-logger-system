@@ -5,18 +5,20 @@ import SidebarDashboardLink from "./SidebarDashboardLink";
 
 const Sidebar = () => {
     return (
-        <Drawer>
-            <SidebarDashboardLink
-                to="/private/dashboard"
-                Icon={AiOutlineDashboard}
-                textName="Dashboard"
-            />
-            <SidebarDashboardLink
-                to="/private/manage-user"
-                Icon={FaUserCog}
-                textName="ตั้งค่าผู้ใช้"
-            />
-        </Drawer>
+        <div>
+            <Drawer>
+                <SidebarDashboardLink
+                    to="/private/dashboard"
+                    Icon={AiOutlineDashboard}
+                    textName="Dashboard"
+                />
+                <SidebarDashboardLink
+                    to="/private/manage-user"
+                    Icon={FaUserCog}
+                    textName="ตั้งค่าผู้ใช้"
+                />
+            </Drawer>
+        </div>
 
     )
 }
