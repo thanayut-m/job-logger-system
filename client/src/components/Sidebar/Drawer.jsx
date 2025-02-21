@@ -1,20 +1,28 @@
+import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
+import DrawerList from './DrawerList';
+import { AiOutlineDashboard } from 'react-icons/ai';
+import { FaUserCog } from 'react-icons/fa';
 
-const Drawer = ({ children }) => {
-
+const Drawers = ({ toggleDrawer }) => {
     return (
-        <div className="drawer">
-            <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-side">
-                <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                    {children}
-                </ul>
-            </div>
-        </div>
-    )
-}
-Drawer.propTypes = {
-    children: PropTypes.node.isRequired,
-}
-export default Drawer
+        <Box sx={{ width: 300 }} role="presentation" onClick={() => toggleDrawer(false)}>
+            <DrawerList
+                textName="to-do-list"
+                to="/private/dashboard"
+                Icon={AiOutlineDashboard}
+            />
+            <DrawerList
+                textName="ตั้งค่าผู้ใช้"
+                to="/private/manage-user"
+                Icon={FaUserCog}
+            />
+        </Box>
+    );
+};
+
+Drawers.propTypes = {
+    toggleDrawer: PropTypes.func.isRequired,
+};
+
+export default Drawers;

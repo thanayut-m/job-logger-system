@@ -1,10 +1,12 @@
-import { GiHamburgerMenu } from "react-icons/gi";
+import { GiHamburgerMenu } from 'react-icons/gi';
+import PropTypes from 'prop-types';
 
-const DrawerToggle = () => {
-    return (
-        <label htmlFor="my-drawer" className="cursor-pointer text-2xl">
-            <GiHamburgerMenu />
-        </label>
-    )
-}
-export default DrawerToggle
+const DrawerToggle = ({ toggleDrawer }) => {
+    return <GiHamburgerMenu onClick={() => toggleDrawer(true)} />;
+};
+
+DrawerToggle.propTypes = {
+    toggleDrawer: PropTypes.func.isRequired,
+};
+
+export default DrawerToggle;

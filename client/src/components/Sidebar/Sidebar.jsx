@@ -1,25 +1,21 @@
-import Drawer from "./Drawer"
-import { AiOutlineDashboard } from "react-icons/ai";
-import { FaUserCog } from "react-icons/fa";
-import SidebarDashboardLink from "./SidebarDashboardLink";
+import Drawer from '@mui/material/Drawer';
+import DrawerList from './Drawer';
+import PropTypes from 'prop-types';
 
-const Sidebar = () => {
+const Sidebar = ({ open, toggleDrawer }) => {
+
     return (
         <div>
-            <Drawer>
-                <SidebarDashboardLink
-                    to="/private/dashboard"
-                    Icon={AiOutlineDashboard}
-                    textName="Dashboard"
-                />
-                <SidebarDashboardLink
-                    to="/private/manage-user"
-                    Icon={FaUserCog}
-                    textName="ตั้งค่าผู้ใช้"
-                />
+            <Drawer open={open} onClose={() => toggleDrawer(false)}>
+                <DrawerList toggleDrawer={toggleDrawer} />
             </Drawer>
         </div>
-
     )
 }
+
+Sidebar.propTypes = {
+    open: PropTypes.bool.isRequired,
+    toggleDrawer: PropTypes.func.isRequired,
+};
+
 export default Sidebar

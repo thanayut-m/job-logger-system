@@ -2,13 +2,14 @@ import DrawerToggle from "./DrawerToggle";
 import EmployeeInfo from "./EmployeeInfo"
 import Logo from "./Logo"
 import SignOut from "./SignOut"
+import PropTypes from 'prop-types';
 
+const Navbar = ({ toggleDrawer }) => {
 
-const Navbar = () => {
     return (
-        <div className="bg-amber-600 py-2 px-3 flex justify-between items-center shadow-2xl w-full fixed top-0 left-0 z-10">
+        <div className="bg-amber-600 py-2 px-3 flex justify-between items-center shadow-2xl w-full">
             <div className="flex gap-4 items-center">
-                <DrawerToggle />
+                <DrawerToggle toggleDrawer={toggleDrawer} />
                 <Logo />
             </div>
 
@@ -20,4 +21,9 @@ const Navbar = () => {
 
     )
 }
+
+Navbar.propTypes = {
+    toggleDrawer: PropTypes.func.isRequired
+}
+
 export default Navbar
