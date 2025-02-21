@@ -1,11 +1,19 @@
 import dayjs from "dayjs";
 import PrivateLayouts from "../Layouts/PrivateLayouts"
 import MyDatePicker from "../components/MyDatePicker";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import Buttons from './../components/Buttons';
 import MultipleSelect from "../components/MultipleSelect";
+import { useState } from "react";
+import Modal from "../components/Modal/Modal";
 
 const Dashboard = () => {
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    console.log(open)
+    const handleClose = () => setOpen(false);
+
+
 
     const row = [
         { id: 1, hospital: 'โรงพยาบาลทดสอบ', status1: 'กำลังดำเนินการ', tat: 12, issueChannel: 'กลุ่มส้ม', problem: 'Canada', dateFound: '12/16/2020', dateResolved: '12/16/2020', responsible: 'ชื่อทดสอบ-นามสกุลทดสอบ', status: 'approve' },
@@ -48,6 +56,7 @@ const Dashboard = () => {
                         <Buttons
                             type="button"
                             text="เพิ่มข้อมูล"
+                            onClick={handleOpen}
                         />
                     </div>
                 </div>
@@ -92,6 +101,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+            {open && <Modal open={open} handleClose={handleClose} />}
         </PrivateLayouts>
     )
 }
