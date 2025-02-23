@@ -1,19 +1,26 @@
 import dayjs from "dayjs";
 import PrivateLayouts from "../Layouts/PrivateLayouts"
 import MyDatePicker from "../components/MyDatePicker";
-import { Button, TextField } from "@mui/material";
 import Buttons from './../components/Buttons';
-import MultipleSelect from "../components/MultipleSelect";
 import { useState } from "react";
 import Modal from "../components/Modal/Modal";
+import { TextField } from "@mui/material";
+import DropdownList from "../components/DropdownList/DropdownList";
 
 const Dashboard = () => {
+    const [selectedValues, setSelectedValues] = useState(1);
+
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     console.log(open)
     const handleClose = () => setOpen(false);
 
-
+    const menuOptions = [
+        { value: 1, text: "ทั้งหมด" },
+        { value: 2, text: "ชื่อทดสอบ-นามสกุลทดสอบ1" },
+        { value: 3, text: "ชื่อทดสอบ-นามสกุลทดสอบ2" },
+        { value: 4, text: "ชื่อทดสอบ-นามสกุลทดสอบ3" },
+    ];
 
     const row = [
         { id: 1, hospital: 'โรงพยาบาลทดสอบ', status1: 'กำลังดำเนินการ', tat: 12, issueChannel: 'กลุ่มส้ม', problem: 'Canada', dateFound: '12/16/2020', dateResolved: '12/16/2020', responsible: 'ชื่อทดสอบ-นามสกุลทดสอบ', status: 'approve' },
@@ -50,7 +57,12 @@ const Dashboard = () => {
                         />
                     </div>
                     <div className=" flex justify-end items-end">
-                        <MultipleSelect />
+                        <DropdownList
+                            label="Name"
+                            options={menuOptions}
+                            selectedValues={selectedValues}
+                            setSelectedValues={setSelectedValues}
+                        />
                     </div>
                     <div className=" flex justify-end items-end">
                         <Buttons

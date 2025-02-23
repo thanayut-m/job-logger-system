@@ -2,6 +2,7 @@ import { Box, Button, Typography, Modal as MuiModal } from "@mui/material";
 import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 import { IoMdClose } from "react-icons/io";
+import FormDetail from "./FormDetail";
 
 const Modal = ({ open, handleClose }) => {
     const handleCloseCallback = useCallback(() => {
@@ -55,9 +56,8 @@ const Modal = ({ open, handleClose }) => {
                         marginY: 2,
                     }}
                 >
-                    <Typography variant="body1">
-                        Detail
-                    </Typography>
+                    <FormDetail />
+
                 </Box>
 
                 {/* Footer */}
