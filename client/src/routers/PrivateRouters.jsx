@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
-import Dashboard from "../pages/Dashboard";
 import ManageUser from "../pages/Admin/Manage-User";
+import Dashboard from "../pages/Dashboard/Dashboard";
 
 const PrivateRouters = () => {
     return (
