@@ -46,7 +46,7 @@ const CardTitle = ({ handleOpen }) => {
             </div>
             <div className=" flex justify-end items-end">
                 <DropdownList
-                    label="Name"
+                    textName="Name"
                     options={menuOptions}
                     selectedValues={selectedValues}
                     setSelectedValues={setSelectedValues}

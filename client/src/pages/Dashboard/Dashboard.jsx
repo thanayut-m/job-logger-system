@@ -2,8 +2,9 @@
 import PrivateLayouts from "../../Layouts/PrivateLayouts"
 import { useState } from "react";
 import Modal from "../../components/Modal/Modal";
-import CardTitle from "./cardtitle";
+import CardTitle from "./CardTitle";
 import CardDetail from "./CardDetail";
+import ModalDetail from "./ModalDetail";
 
 const Dashboard = () => {
 
@@ -20,7 +21,12 @@ const Dashboard = () => {
                 <CardDetail />
 
             </div>
-            {open && <Modal open={open} handleClose={handleClose} />}
+            {open
+                &&
+                <Modal open={open} handleClose={handleClose} textName="ลงข้อมูลแก้ไขปัญหา" >
+                    <ModalDetail />
+                </Modal>
+            }
         </PrivateLayouts>
     )
 }

@@ -2,9 +2,14 @@ import { Box, Button, Typography, Modal as MuiModal } from "@mui/material";
 import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 import { IoMdClose } from "react-icons/io";
-import FormDetail from "./FormDetail";
+import FormFooter from "./FormFooter";
 
-const Modal = ({ open, handleClose }) => {
+const Modal = ({
+    open,
+    handleClose,
+    children,
+    textName
+}) => {
     const handleCloseCallback = useCallback(() => {
         handleClose();
     }, [handleClose]);
@@ -45,7 +50,7 @@ const Modal = ({ open, handleClose }) => {
 
                 {/* Title */}
                 <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                    ลงข้อมูลปัญหา
+                    {textName}
                 </Typography>
 
                 {/* Content Section */}
@@ -56,21 +61,18 @@ const Modal = ({ open, handleClose }) => {
                         marginY: 2,
                     }}
                 >
-                    <FormDetail />
+                    {children}
 
                 </Box>
 
                 {/* Footer */}
-                <Box sx={{ width: '100%', textAlign: 'end', padding: 1, borderTop: '1px solid #ddd' }}>
-                    <Typography variant="caption">
-                        <Button
-                            variant="contained"
-                        >
-                            บันทึก
-                        </Button>
-                    </Typography>
-                </Box>
-
+                <FormFooter>
+                    <Button
+                        variant="contained"
+                    >
+                        บันทึก
+                    </Button>
+                </FormFooter>
             </Box>
         </MuiModal>
     );
@@ -79,6 +81,8 @@ const Modal = ({ open, handleClose }) => {
 Modal.propTypes = {
     open: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
+    textName: PropTypes.string.isRequired,
 };
 
 export default Modal;

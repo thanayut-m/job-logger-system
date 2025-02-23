@@ -5,7 +5,12 @@ import Select from '@mui/material/Select';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const DropdownList = ({ selectedValues, setSelectedValues, options }) => {
+const DropdownList = ({
+    selectedValues,
+    setSelectedValues,
+    options,
+    textName
+}) => {
     const [open, setOpen] = useState(false);
 
     const handleChange = (event) => {
@@ -17,7 +22,7 @@ const DropdownList = ({ selectedValues, setSelectedValues, options }) => {
     return (
         <div className='w-full'>
             <FormControl size="small" sx={{ minWidth: '100%' }}>
-                <InputLabel id="demo-controlled-open-select-label">Name</InputLabel>
+                <InputLabel id="demo-controlled-open-select-label">{ textName}</InputLabel>
                 <Select
                     labelId="demo-controlled-open-select-label"
                     id="demo-controlled-open-select"
@@ -47,6 +52,7 @@ DropdownList.propTypes = {
     ).isRequired,
     selectedValues: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     setSelectedValues: PropTypes.func.isRequired,
+    textName: PropTypes.string.isRequired
 };
 
 export default DropdownList
