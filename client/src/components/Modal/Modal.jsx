@@ -26,7 +26,7 @@ const Modal = ({
                     boxShadow: 24,
                     p: 4,
                     borderRadius: 2,
-                    width: '90%',
+                    width: '60%',
                     // maxWidth: '800px',
                     height: '90%',
                     // maxHeight: '90%',

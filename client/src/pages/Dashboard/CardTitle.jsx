@@ -1,14 +1,13 @@
-import { TextField } from "@mui/material"
-import MyDatePicker from "../../components/MyDatePicker"
-import DropdownList from "../../components/DropdownList/DropdownList"
 import Buttons from "../../components/Buttons"
-import dayjs from "dayjs";
-import { useState } from "react";
 import { PropTypes } from 'prop-types';
+import FromInputDate from "../../components/FromInputDate";
+import FormInput from "../../components/FormInput";
+import { useForm } from "react-hook-form";
+import FromSelect from "../../components/FromSelect";
 
 
 const CardTitle = ({ handleOpen }) => {
-    const [selectedValues, setSelectedValues] = useState(1);
+    const { register } = useForm();
 
     const menuOptions = [
         { value: 1, text: "ทั้งหมด" },
@@ -18,38 +17,37 @@ const CardTitle = ({ handleOpen }) => {
     ];
 
     return (
-        <div className="bg-white rounded-xl shadow-2xl p-3 grid grid-cols-6 gap-3 text-center ">
+        <div className="bg-white rounded-xl shadow-2xl p-3 grid grid-cols-6 gap-3 items-end ">
 
             <div>
-                <p className="text-4xl font-semibold">To-Do List</p>
+                <p className="text-4xl font-semibold text-center">To-Do List</p>
             </div>
             <div>
-                <MyDatePicker
-                    label="Start date"
-                    defaultValue={dayjs().subtract(1, 'month')}
+                <FromInputDate
+                    label="Start Date"
+                    type="date"
+                    subtract={{ value: 1, unit: "month" }}
                 />
             </div>
             <div >
-                <MyDatePicker
-                    label="End date"
-                    defaultValue={dayjs()}
+                <FromInputDate
+                    label="End Date"
+                    type="date"
+                />
+            </div>
+            <div>
+                <FormInput
+                    label="Search"
+                    register={register}
+                    name="search"
+                    type="search"
+                    placeholder="Search..."
                 />
             </div>
             <div className=" flex justify-end items-end">
-                <TextField
-                    id="outlined-basic"
-                    label="Search..."
-                    variant="outlined"
-                    size="small"
-                    className="w-full"
-                />
-            </div>
-            <div className=" flex justify-end items-end">
-                <DropdownList
-                    textName="Name"
+                <FromSelect
+                    label="ผู้รับผิดชอบ"
                     options={menuOptions}
-                    selectedValues={selectedValues}
-                    setSelectedValues={setSelectedValues}
                 />
             </div>
             <div className=" flex justify-end items-end">

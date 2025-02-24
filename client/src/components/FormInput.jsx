@@ -5,17 +5,17 @@ const FormInput = ({
     name,
     placeholder,
     type = "text",
-    textname,
+    label,
     id,
     errors = {}
 }) => {
     return (
-        <fieldset className="fieldset">
+        <fieldset >
             <label
                 htmlFor={id || name}
                 className="text-xs font-bold text-black "
             >
-                {textname}
+                {label}
             </label>
             <input
                 {...register(name)}
@@ -36,7 +36,7 @@ FormInput.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    textname: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     errors: PropTypes.func.isRequired
 }
