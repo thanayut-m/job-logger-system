@@ -1,12 +1,11 @@
-import Buttons from "../../components/Buttons"
-import { PropTypes } from 'prop-types';
 import FromInputDate from "../../components/FromInputDate";
 import FormInput from "../../components/FormInput";
 import { useForm } from "react-hook-form";
 import FromSelect from "../../components/FromSelect";
+import DashboardModal from "./Modal/DashboardModal";
 
 
-const CardTitle = ({ handleOpen }) => {
+const CardTitle = () => {
     const { register } = useForm();
 
     const menuOptions = [
@@ -51,17 +50,9 @@ const CardTitle = ({ handleOpen }) => {
                 />
             </div>
             <div className=" flex justify-end items-end">
-                <Buttons
-                    type="button"
-                    text="เพิ่มข้อมูล"
-                    onClick={handleOpen}
-                />
+                <DashboardModal />
             </div>
         </div>
     )
 }
-
-CardTitle.propTypes = {
-    handleOpen: PropTypes.func.isRequired,
-};
 export default CardTitle

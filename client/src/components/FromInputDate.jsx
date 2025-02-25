@@ -12,7 +12,7 @@ const FromInputDate = ({ label, type, subtract }) => {
             </label>
             <input
                 type={type}
-                className="input mt-1"
+                className="input input-neutral mt-1"
                 defaultValue={dayjs().subtract(subtractValue, subtractUnit).format("YYYY-MM-DD")}
             />
         </div>

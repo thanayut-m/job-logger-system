@@ -19,7 +19,7 @@ const FromSelect = ({
             <select
                 value={selectedValues}
                 onChange={handleChange}
-                className="select"
+                className="select select-neutral"
             >
                 {options.map((option) => {
                     return (
