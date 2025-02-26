@@ -18,24 +18,32 @@ const Modal = ({ title, detail, footer, label }) => {
                 text={label}
                 onClick={openModal}
             />
-            <dialog ref={modalRef} className="modal ">
-                <div className="modal-box">
+            <dialog ref={modalRef} className="modal">
+                <div className="modal-box max-w-5xl w-full h-[80vh] flex flex-col">
+                    {/* ปุ่มปิด Modal */}
                     <form method="dialog">
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                             ✕
                         </button>
                     </form>
 
-                    {/* Title */}
-                    <h3 className="font-bold text-lg">{title}</h3>
+                    {/* Title (Fixed at Top) */}
+                    <div className="p-3 bg-white">
+                        <h3 className="font-bold text-lg">{title}</h3>
+                    </div>
 
-                    {/* Detail */}
-                    <p className="py-4">{detail}</p>
+                    {/* Detail (Scrollable) */}
+                    <div className="flex-grow overflow-y-auto p-4">
+                        {detail}
+                    </div>
 
-                    {/* Footer */}
-                    <div className="mt-2 py-2">{footer}</div>
+                    {/* Footer (Fixed at Bottom) */}
+                    <div className=" p-4 bg-white">
+                        {footer}
+                    </div>
                 </div>
             </dialog>
+
         </div>
     )
 }

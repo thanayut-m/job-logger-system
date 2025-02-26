@@ -1,7 +1,7 @@
 const FooterModal = () => {
     return (
-        <div>
-            <button className="btn btn-primary">Confirm</button>
+        <div className="flex justify-end">
+            <button className="btn btn-primary">ยืนยัน</button>
         </div>
     )
 }
