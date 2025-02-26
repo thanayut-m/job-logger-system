@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import FormInput from "../../../components/FormInput";
-import FromInputDate from "../../../components/FromInputDate";
+import FormInputDate from "../../../components/FormInputDate";
 import TextArea from "../../../components/TextArea"
-import FromSelect from './../../../components/FromSelect';
+import FormSelect from '../../../components/FormSelect';
+import FormFileInput from "../../../components/FormFileInput";
 
 const DetailModal = () => {
     const { register } = useForm();
@@ -19,7 +20,7 @@ const DetailModal = () => {
 
             <div className="grid grid-cols-12 gap-2 text-center">
                 <div className="col-span-12 ">
-                    <FromSelect
+                    <FormSelect
                         label="โรงพยาบาล"
                         options={menuOptions}
                     />
@@ -33,64 +34,72 @@ const DetailModal = () => {
                     />
                 </div>
                 <div className="col-span-2 ">
-                    <FromSelect
+                    <FormSelect
                         label="ความเร่งด่วน"
                         options={menuOptions}
                     />
                 </div>
                 <div className="col-span-6 ">
-                    <FromSelect
+                    <FormSelect
                         label="ผู้รับผิดชอบ"
                         options={menuOptions}
                     />
                 </div>
                 <div className="col-span-6 ">
-                    <FromSelect
+                    <FormSelect
                         label="ช่วงเวลา"
                         options={menuOptions}
                     />
                 </div>
                 <div className="col-span-6 ">
-                    <FromSelect
+                    <FormSelect
                         label="หมวด"
                         options={menuOptions}
                     />
                 </div>
                 <div className="col-span-6 ">
-                    <FromSelect
+                    <FormSelect
                         label="ช่องทางรับปัญหา"
                         options={menuOptions}
                     />
                 </div>
                 <div className="col-span-3">
-                    <FromInputDate
+                    <FormInputDate
                         label="DATE START"
                         type="date"
                     />
                 </div>
                 <div className="col-span-3">
-                    <FromInputDate
+                    <FormInputDate
                         label="TIME START"
                         type="time"
                     />
                 </div>
                 <div className="col-span-3">
-                    <FromInputDate
+                    <FormInputDate
                         label="DATE END"
                         type="date"
                     />
                 </div>
                 <div className="col-span-3">
-                    <FromInputDate
+                    <FormInputDate
                         label="TIME END"
                         type="time"
                     />
                 </div>
             </div>
-            <div className="">
-                <TextArea
-                    label="วิธีแก้ไขปัญหา"
-                />
+            <div className="flex flex-col gap-3">
+                <div className="">
+                    <TextArea
+                        label="วิธีแก้ไขปัญหา"
+                    />
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-amber-300">
+                        <FormFileInput />
+                    </div>
+                    <div>view image</div>
+                </div>
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
-const FromInputDate = ({ label, type, subtract }) => {
+const FormInputDate = ({ label, type, subtract }) => {
     const subtractValue = subtract ? subtract.value : 0;
     const subtractUnit = subtract ? subtract.unit : 'day';
 
@@ -19,7 +19,7 @@ const FromInputDate = ({ label, type, subtract }) => {
     );
 };
 
-FromInputDate.propTypes = {
+FormInputDate.propTypes = {
     label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     subtract: PropTypes.shape({
@@ -28,8 +28,8 @@ FromInputDate.propTypes = {
     }),
 };
 
-FromInputDate.defaultProps = {
+FormInputDate.defaultProps = {
     subtract: { value: 0, unit: "day" },
 };
 
-export default FromInputDate;
+export default FormInputDate;

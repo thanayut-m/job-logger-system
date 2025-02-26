@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from 'prop-types';
 
-const FromSelect = ({
+const FormSelect = ({
     options,
     label
 }) => {
@@ -34,7 +34,7 @@ const FromSelect = ({
     );
 };
 
-FromSelect.propTypes = {
+FormSelect.propTypes = {
     options: PropTypes.arrayOf(
         PropTypes.shape({
             value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -44,4 +44,4 @@ FromSelect.propTypes = {
     label: PropTypes.string.isRequired,
 }
 
-export default FromSelect;
+export default FormSelect;

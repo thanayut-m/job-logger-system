@@ -1,7 +1,7 @@
-import FromInputDate from "../../components/FromInputDate";
+import FormInputDate from "../../components/FormInputDate";
 import FormInput from "../../components/FormInput";
 import { useForm } from "react-hook-form";
-import FromSelect from "../../components/FromSelect";
+import FormSelect from "../../components/FormSelect";
 import DashboardModal from "./Modal/DashboardModal";
 
 
@@ -22,14 +22,14 @@ const CardTitle = () => {
                 <p className="text-4xl font-semibold text-center">To-Do List</p>
             </div>
             <div>
-                <FromInputDate
+                <FormInputDate
                     label="Start Date"
                     type="date"
                     subtract={{ value: 1, unit: "month" }}
                 />
             </div>
             <div >
-                <FromInputDate
+                <FormInputDate
                     label="End Date"
                     type="date"
                 />
@@ -43,8 +43,8 @@ const CardTitle = () => {
                     placeholder="Search..."
                 />
             </div>
-            <div className=" flex justify-end items-end">
-                <FromSelect
+            <div className="items-end">
+                <FormSelect
                     label="ผู้รับผิดชอบ"
                     options={menuOptions}
                 />
