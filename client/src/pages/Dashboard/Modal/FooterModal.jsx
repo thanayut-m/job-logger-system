@@ -1,7 +1,13 @@
-const FooterModal = () => {
+const FooterModal = ({ onSubmit }) => {
+
     return (
         <div className="flex justify-end">
-            <button className="btn btn-primary">ยืนยัน</button>
+            <button
+                className="btn btn-primary"
+                onClick={onsubmit}
+            >
+                ยืนยัน
+            </button>
         </div>
     )
 }

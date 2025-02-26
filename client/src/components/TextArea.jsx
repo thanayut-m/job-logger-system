@@ -1,17 +1,24 @@
 import PropTypes from 'prop-types';
 
-const TextArea = ({ placeholder, label }) => {
+const TextArea = ({
+    placeholder,
+    label,
+    register,
+    name,
+}) => {
 
     return (
         <div>
-            <label className="text-sm font-semibold text-black">
+            <label htmlFor={name} className="text-sm font-semibold text-black">
                 {label}
             </label>
             <textarea
+                {...register(name)}
                 className="textarea w-full"
                 placeholder={placeholder}
-                rows={5}
+                rows={3}
             />
+
         </div>
     )
 }
@@ -19,5 +26,7 @@ const TextArea = ({ placeholder, label }) => {
 TextArea.propTypes = {
     placeholder: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    register: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
 }
 export default TextArea

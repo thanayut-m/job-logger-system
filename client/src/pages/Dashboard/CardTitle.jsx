@@ -23,13 +23,17 @@ const CardTitle = () => {
             </div>
             <div>
                 <FormInputDate
+                    register={register}
+                    name="T"
                     label="Start Date"
                     type="date"
-                    subtract={{ value: 1, unit: "month" }}
+                // subtract={{ value: 1, unit: "month" }}
                 />
             </div>
             <div >
                 <FormInputDate
+                    register={register}
+                    name="T"
                     label="End Date"
                     type="date"
                 />
@@ -45,6 +49,8 @@ const CardTitle = () => {
             </div>
             <div className="items-end">
                 <FormSelect
+                    register={register}
+                    name="T"
                     label="ผู้รับผิดชอบ"
                     options={menuOptions}
                 />
