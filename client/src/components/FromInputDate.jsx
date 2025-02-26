@@ -7,12 +7,12 @@ const FromInputDate = ({ label, type, subtract }) => {
 
     return (
         <div className="flex flex-col">
-            <label className="text-xs font-bold text-black">
+            <label className="text-xs font-bold text-black text-start">
                 {label}
             </label>
             <input
                 type={type}
-                className="input input-neutral mt-1"
+                className="input input-neutral mt-1 w-full"
                 defaultValue={dayjs().subtract(subtractValue, subtractUnit).format("YYYY-MM-DD")}
             />
         </div>

@@ -10,10 +10,10 @@ const FormInput = ({
     errors = {}
 }) => {
     return (
-        <fieldset >
+        <fieldset className="flex flex-col" >
             <label
                 htmlFor={id || name}
-                className="text-xs font-bold text-black "
+                className="text-xs font-bold text-black text-start"
             >
                 {label}
             </label>
@@ -22,7 +22,7 @@ const FormInput = ({
                 id={id || name}
                 type={type}
                 placeholder={placeholder}
-                className={`${errors[name] ? " input input-error" : "input input-neutral"} bg-white text-black w-full`}
+                className={`${errors[name] ? " input input-error" : "input input-neutral"} mt-1  w-full`}
             />
             {
                 errors[name] && (<p className="text-red-500 font-bold text-sm -mb-2">{errors[name].message}</p>)

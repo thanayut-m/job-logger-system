@@ -12,14 +12,14 @@ const FromSelect = ({
     };
 
     return (
-        <div>
-            <label className="text-xs font-bold text-black">
+        <div className="flex flex-col">
+            <label className="text-xs font-bold text-black text-start">
                 {label}
             </label>
             <select
                 value={selectedValues}
                 onChange={handleChange}
-                className="select select-neutral"
+                className="select select-neutral w-full mt-1"
             >
                 {options.map((option) => {
                     return (
