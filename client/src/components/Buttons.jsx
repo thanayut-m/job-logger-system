@@ -14,8 +14,8 @@ const Buttons = ({
             className="bg-blue-600 hover:bg-blue-400 p-2 rounded-xl w-full opacity-100">
             {
                 isSubmitting
-                    ? <p className="font-bold">Please wait...</p>
-                    : <p>{text}</p>
+                    ? <p className="font-semibold text-lg">Please wait...</p>
+                    : <p className="font-semibold text-lg" >{text}</p>
             }
         </button>
     )

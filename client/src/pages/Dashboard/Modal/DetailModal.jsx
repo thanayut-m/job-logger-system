@@ -19,6 +19,7 @@ const DetailModal = () => {
             </div>
             <div>
                 <TextArea
+                    label="Test"
                     placeholder="Test"
                 />
             </div>

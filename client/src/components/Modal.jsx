@@ -29,7 +29,7 @@ const Modal = ({ title, detail, footer, label }) => {
 
                     {/* Title (Fixed at Top) */}
                     <div className="p-3 bg-white">
-                        <h3 className="font-bold text-lg">{title}</h3>
+                        <h3 className="font-semibold text-2xl">{title}</h3>
                     </div>
 
                     {/* Detail (Scrollable) */}
