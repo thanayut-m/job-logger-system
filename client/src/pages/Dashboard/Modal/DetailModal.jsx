@@ -1,13 +1,13 @@
-import { useForm } from "react-hook-form";
 import FormInput from "../../../components/FormInput";
 import FormInputDate from "../../../components/FormInputDate";
 import TextArea from "../../../components/TextArea"
 import FormSelect from '../../../components/FormSelect';
 import FormFileInput from "../../../components/FormFileInput";
+import PropTypes from 'prop-types';
 
-const DetailModal = () => {
-    const { register, handleSubmit } = useForm();
-
+const DetailModal = ({
+    register
+}) => {
 
     const menuOptions = [
         { value: 1, text: "ทั้งหมด" },
@@ -16,20 +16,16 @@ const DetailModal = () => {
         { value: 4, text: "ชื่อทดสอบ-นามสกุลทดสอบ3" },
     ];
 
-    const onSubmit = (data) => {
-        console.log(data);
-    }
 
     return (
-        <form
-            onSubmit={handleSubmit(onSubmit)}
+        <div
             className="grid grid-row gap-2">
 
             <div className="grid grid-cols-12 gap-2 text-center">
                 <div className="col-span-12 ">
                     <FormSelect
                         register={register}
-                        name="T"
+                        name="todo_hospital"
                         label="โรงพยาบาล"
                         options={menuOptions}
                     />
@@ -45,7 +41,7 @@ const DetailModal = () => {
                 <div className="col-span-2 ">
                     <FormSelect
                         register={register}
-                        name="T"
+                        name="todo_lavel"
                         label="ความเร่งด่วน"
                         options={menuOptions}
                     />
@@ -53,7 +49,7 @@ const DetailModal = () => {
                 <div className="col-span-6 ">
                     <FormSelect
                         register={register}
-                        name="T"
+                        name="user"
                         label="ผู้รับผิดชอบ"
                         options={menuOptions}
                     />
@@ -61,7 +57,7 @@ const DetailModal = () => {
                 <div className="col-span-6 ">
                     <FormSelect
                         register={register}
-                        name="T"
+                        name="todo_period"
                         label="ช่วงเวลา"
                         options={menuOptions}
                     />
@@ -69,7 +65,7 @@ const DetailModal = () => {
                 <div className="col-span-6 ">
                     <FormSelect
                         register={register}
-                        name="T"
+                        name="todo_la_Support_id"
                         label="หมวด"
                         options={menuOptions}
                     />
@@ -77,7 +73,7 @@ const DetailModal = () => {
                 <div className="col-span-6 ">
                     <FormSelect
                         register={register}
-                        name="T"
+                        name="todo_Channels_id"
                         label="ช่องทางรับปัญหา"
                         options={menuOptions}
                     />
@@ -85,7 +81,7 @@ const DetailModal = () => {
                 <div className="col-span-3">
                     <FormInputDate
                         register={register}
-                        name="T"
+                        name="todo_receive_date"
                         label="DATE START"
                         type="date"
                     />
@@ -93,7 +89,7 @@ const DetailModal = () => {
                 <div className="col-span-3">
                     <FormInputDate
                         register={register}
-                        name="T"
+                        name="todo_receive_time"
                         label="TIME START"
                         type="time"
                     />
@@ -101,7 +97,7 @@ const DetailModal = () => {
                 <div className="col-span-3">
                     <FormInputDate
                         register={register}
-                        name="T"
+                        name="todo_report_date"
                         label="DATE END"
                         type="date"
                     />
@@ -109,7 +105,7 @@ const DetailModal = () => {
                 <div className="col-span-3">
                     <FormInputDate
                         register={register}
-                        name="T"
+                        name="todo_report_time"
                         label="TIME END"
                         type="time"
                     />
@@ -119,7 +115,7 @@ const DetailModal = () => {
                 <div className="">
                     <TextArea
                         register={register}
-                        name="Ts"
+                        name="todo_note_Troubleshoot"
                         label="วิธีแก้ไขปัญหา"
                     />
                 </div>
@@ -130,7 +126,12 @@ const DetailModal = () => {
                     <div>view image</div>
                 </div>
             </div>
-        </form>
+        </div>
     )
 }
+
+DetailModal.propTypes = {
+    register: PropTypes.object.isRequired,
+};
+
 export default DetailModal

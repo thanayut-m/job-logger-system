@@ -32,7 +32,7 @@ const SignUp = () => {
                     <h1 className="text-2xl text-center mt-9 font-bold text-black">สมัครสมาชิก</h1>
                     <div className="grid grid-cols-2 max-md:grid-cols-1 gap-2 mt-6">
                         <FormInput
-                            textname="ชื่อ"
+                            label="ชื่อ"
                             register={register}
                             name="first_name"
                             type="text"
@@ -50,7 +50,7 @@ const SignUp = () => {
                     </div>
                     <div className="mt-3">
                         <FormInput
-                            textname="ชื่อผู้ใช้"
+                            label="ชื่อผู้ใช้"
                             register={register}
                             name="username"
                             type="text"
@@ -60,7 +60,7 @@ const SignUp = () => {
                     </div>
                     <div className="grid grid-cols-2 max-md:grid-cols-1 gap-2 mt-3">
                         <FormInput
-                            textname="รหัสผ่าน"
+                            label="รหัสผ่าน"
                             register={register}
                             name="password"
                             type="password"
@@ -68,7 +68,7 @@ const SignUp = () => {
                             errors={errors}
                         />
                         <FormInput
-                            textname="ยืนยันรหัสผ่าน"
+                            label="ยืนยันรหัสผ่าน"
                             register={register}
                             name="password_confirmation"
                             type="text"

@@ -29,7 +29,7 @@ const SignIn = () => {
                         register={register}
                         name="username"
                         type="text"
-                        textname="Username"
+                        label="Username"
                         placeholder="Username..."
                         errors={errors}
                     />
@@ -38,7 +38,7 @@ const SignIn = () => {
                         name="password"
                         type="password"
                         placeholder="Password..."
-                        textname="Password"
+                        label="Password"
                     />
                     <div className='mt-3 mb-9'>
                         <Buttons

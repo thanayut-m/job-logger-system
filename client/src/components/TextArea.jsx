@@ -14,7 +14,7 @@ const TextArea = ({
             </label>
             <textarea
                 {...register(name)}
-                className="textarea w-full"
+                className="textarea textarea-neutral  w-full"
                 placeholder={placeholder}
                 rows={3}
             />
