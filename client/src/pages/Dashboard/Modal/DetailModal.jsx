@@ -119,12 +119,11 @@ const DetailModal = ({
                         label="วิธีแก้ไขปัญหา"
                     />
                 </div>
-                <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-amber-300">
-                        <FormFileInput />
-                    </div>
-                    <div>view image</div>
-                </div>
+                <FormFileInput
+                    name="todo_images"
+                    label="เพิ่มรูปภาพ"
+
+                />
             </div>
         </div>
     )

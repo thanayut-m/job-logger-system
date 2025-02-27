@@ -19,7 +19,7 @@ const Modal = ({ title, detail, footer, label }) => {
                 onClick={openModal}
             />
             <dialog ref={modalRef} className="modal">
-                <div className="modal-box max-w-5xl w-full h-[80vh] flex flex-col">
+                <div className="modal-box max-w-5xl w-full h-[90%] flex flex-col">
                     {/* ปุ่มปิด Modal */}
                     <form method="dialog">
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
