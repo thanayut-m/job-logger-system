@@ -6,7 +6,8 @@ import FormFileInput from "../../../components/FormFileInput";
 import PropTypes from 'prop-types';
 
 const DetailModal = ({
-    register
+    register,
+    setValue
 }) => {
 
     const menuOptions = [
@@ -120,6 +121,7 @@ const DetailModal = ({
                     />
                 </div>
                 <FormFileInput
+                    setValue={setValue}
                     name="todo_images"
                     label="เพิ่มรูปภาพ"
 
@@ -131,6 +133,7 @@ const DetailModal = ({
 
 DetailModal.propTypes = {
     register: PropTypes.object.isRequired,
+    setValue: PropTypes.func.isRequired,
 };
 
 export default DetailModal

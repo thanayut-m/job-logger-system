@@ -1,40 +1,35 @@
 import { useState } from "react";
 import { FaTrashCan } from "react-icons/fa6";
 import PropTypes from "prop-types";
-import { useFormContext } from "react-hook-form";
 
-const FormFileInput = ({ name, label }) => {
-    const { setValue } = useFormContext(); 
+const FormFileInput = ({ name, label, setValue }) => {
     const [images, setImages] = useState([]);
 
     const handleImageChange = (event) => {
-        const files = Array.from(event.target.files);
-        if (files.length === 0) return;
+        const file = event.target.files[0];
+        if (!file) return;
 
-        const validTypes = ["image/jpeg", "image/png"];
-        const newImages = [];
+        const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp", "image/svg+xml"];
+        if (!validTypes.includes(file.type)) {
+            console.log("ไฟล์ต้องเป็นรูปภาพเท่านั้น (JPEG, PNG, GIF, WEBP, SVG)");
+            return;
+        }
 
-        files.forEach((file) => {
-            if (!validTypes.includes(file.type)) {
-                console.log("ไฟล์ต้องเป็นรูปภาพเท่านั้น (JPEG, PNG)");
-                return;
-            }
+        if (file.size > 1024 * 1024) {
+            console.log("ขนาดไฟล์ต้องไม่เกิน 1MB");
+            return;
+        }
 
-            if (file.size > 1024 * 1024) {
-                console.log("ขนาดไฟล์ต้องไม่เกิน 1MB");
-                return;
-            }
+        if (images.length >= 5) {
+            console.log("สามารถอัปโหลดได้สูงสุด 5 รูป");
+            return;
+        }
 
-            if (images.length + newImages.length < 5) {
-                newImages.push(Object.assign(file, { preview: URL.createObjectURL(file) }));
-            } else {
-                console.log("สามารถอัปโหลดได้สูงสุด 5 รูป");
-            }
-        });
+        const newImage = Object.assign(file, { preview: URL.createObjectURL(file) });
+        const updatedImages = [...images, newImage];
 
-        const updatedImages = [...images, ...newImages];
-        setImages(updatedImages);
-        setValue(name, updatedImages); 
+        setImages(updatedImages)
+        setValue(name, updatedImages)
     };
 
     const removeImage = (index) => {
@@ -43,8 +38,10 @@ const FormFileInput = ({ name, label }) => {
         setValue(name, updatedImages);
     };
 
+
     return (
-        <form className="grid grid-cols-2 gap-3">
+        <form
+            className="grid grid-cols-2 gap-3">
             <div>
                 <label htmlFor={name} className="font-semibold text-sm">
                     {label}
@@ -68,13 +65,13 @@ const FormFileInput = ({ name, label }) => {
                                 alt="preview"
                                 className="w-24 h-24 object-cover rounded-md"
                             />
-                            <button
-                                onClick={() => removeImage(index)}
-                                type="button"
-                                className="absolute top-0 right-0 bg-gray-500 border-none cursor-pointer w-6 h-6 flex items-center justify-center text-sm font-bold opacity-60 hover:opacity-100 transition-opacity px-1 rounded-full"
+                            <div
+                                className="absolute top-0 right-0 bg-gray-500 border-none  w-full h-6 flex items-center justify-end text-sm font-bold opacity-60 px-1"
                             >
-                                <FaTrashCan className="text-white w-4 h-4" />
-                            </button>
+                                <FaTrashCan
+                                    onClick={() => removeImage(index)}
+                                    className="text-white w-4 h-4 hover:opacity-100 transition-opacity cursor-pointer" />
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -86,6 +83,7 @@ const FormFileInput = ({ name, label }) => {
 FormFileInput.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    setValue: PropTypes.func.isRequired,
 };
 
 export default FormFileInput;
