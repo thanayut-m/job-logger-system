@@ -40,7 +40,7 @@ const SignUp = () => {
                             errors={errors}
                         />
                         <FormInput
-                            textname="นามสกุล"
+                            label="นามสกุล"
                             register={register}
                             name="last_name"
                             type="text"

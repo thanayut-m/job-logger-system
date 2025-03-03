@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id          Int         @id @default(autoincrement())
+  username         String      @unique
+  password         String
+  first_name       String
+  last_name        String
+  role             String      @default("person")
+  status           Boolean
+  users_update_at  DateTime    @updatedAt
+  users_created_at DateTime    @default(now())
+  todo_orders      TodoOrder[] @relation("UserTodos")
+  approved_todos   TodoOrder[] @relation("UserApprovals")
+}
+
+model TodoOrder {
+  todo_order_id          Int       @id @default(autoincrement())
+  todo_hospital          String
+  todo_order_status      String
+  todo_lavel             String
+  todo_period            String
+  todo_note_request      String?
+  todo_note_Troubleshoot String?
+  todo_receive_date      DateTime?
+  todo_receive_time      DateTime?
+  todo_report_date       DateTime?
+  todo_report_time       DateTime?
+  todo_approve_price     Int?
+  todo_user_approve_id   Int?
+  user_id                Int
+  hospital_id            Int
+  todo_la_Support_id     Int?
+  todo_Channels_id       Int?
+
+  user        User           @relation("UserTodos", fields: [user_id], references: [user_id])
+  approved_by User?          @relation("UserApprovals", fields: [todo_user_approve_id], references: [user_id])
+  hospital    Hospital       @relation(fields: [hospital_id], references: [hospital_id])
+  support     TodoLaSupport? @relation(fields: [todo_la_Support_id], references: [todo_la_Support_id])
+  channel     TodoChannels?  @relation(fields: [todo_Channels_id], references: [todo_Channels_id])
+  todo_images TodoImage[]
+}
+
+model Hospital {
+  hospital_id   Int         @id @default(autoincrement())
+  hospital_name String
+  hospital_date DateTime    @default(now())
+  todo_orders   TodoOrder[]
+}
+
+model TodoLaSupport {
+  todo_la_Support_id   Int         @id @default(autoincrement())
+  todo_la_Support_name String
+  todo_la_Support_date DateTime    @default(now())
+  todo_orders          TodoOrder[]
+}
+
+model TodoImage {
+  todo_image_id   Int       @id @default(autoincrement())
+  todo_image_name String
+  todo_order_id   Int
+  todo_order_date DateTime  @default(now())
+  todo_order      TodoOrder @relation(fields: [todo_order_id], references: [todo_order_id])
+}
+
+model TodoChannels {
+  todo_Channels_id   Int         @id @default(autoincrement())
+  todo_Channels_name String
+  todo_Channels_date DateTime    @default(now())
+  todo_orders        TodoOrder[]
+}

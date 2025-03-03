@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT;
 app.use(morgan("dev"));
 app.use(cors());
-app.use(bodyParser.json({ limit: "10md" }));
+app.use(bodyParser.json({ limit: "10mb" }));
 
 readdirSync("./routes")
   .filter((file) => file.endsWith)
