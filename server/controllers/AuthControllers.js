@@ -100,3 +100,25 @@ exports.signIn = async (req, res) => {
     res.status(500).send("Server Error!!!");
   }
 };
+
+exports.currentUser = async (req, res) => {
+  try {
+    const result = await prisma.user.findUnique({
+      where: {
+        user_id: req.user.id,
+      },
+      select: {
+        user_id: true,
+        first_name: true,
+        last_name: true,
+        role: true,
+        username: true,
+        users_update_at: true,
+      },
+    });
+    // console.log(result);
+    res.status(200).json({ data: result });
+  } catch (error) {
+    res.status(500).send("Server Error!!!");
+  }
+};

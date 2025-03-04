@@ -32,3 +32,19 @@ export const signIn = async (data, navigate) => {
     }
 
 }
+
+export const currenUser = async (isToken) => {
+    try {
+        // console.log("Token" + isToken);
+        const res = await axios.get(VITE_API_PATH + "/auth/current-user", {
+            headers: {
+                Authorization: "Bearer " + isToken,
+            }
+        })
+        // console.log(res.data);
+        return res.data
+    } catch (err) {
+        console.log(err);
+    }
+
+}
