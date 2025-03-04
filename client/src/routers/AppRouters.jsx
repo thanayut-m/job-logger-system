@@ -1,27 +1,44 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, useLocation } from "react-router";
 import PublicRouters from "./publicRouters"
-
 import PrivateRouters from "./PrivateRouters";
 import { currenUser } from "../functions/Auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AppRouters = () => {
-    const [role, setRole] = useState("person");
+    const [role, setRole] = useState("");
+    const [loading, setLoading] = useState(true);
+    const location = useLocation();
 
-    // useEffect(() => {
+    const fetchUserRole = async () => {
+        const idToken = localStorage.getItem(import.meta.env.VITE_SET_TOKEN);
 
-    // }, []);
-    const idToken = localStorage.getItem(import.meta.env.VITE_SET_TOKEN);
+        if (!idToken) {
+            setRole("");
+            setLoading(false);
+            return
+        }
 
-    if (idToken) {
-        currenUser(idToken).then(res => {
-            if (res) {
-                // console.log(res.data.role);
-                setRole(res.data.role);
-            }
-        });
+        try {
+            const res = await currenUser(idToken);
+            // console.log("Role จาก API:", res?.data?.role);
+            setRole(res?.data?.role ?? "");
+        } catch (err) {
+            console.error("Token Invalid:", err);
+            setRole("");
+            localStorage.removeItem(import.meta.env.VITE_SET_TOKEN);
+        } finally {
+            setLoading(false);
+        }
     }
 
+    useEffect(() => {
+        setLoading(true);
+        fetchUserRole();
+    }, [location.pathname]);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <>

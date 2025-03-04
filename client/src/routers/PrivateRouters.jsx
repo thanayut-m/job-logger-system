@@ -1,24 +1,33 @@
 import PropTypes from "prop-types";
-import { Routes, Route } from "react-router";
+import { Routes, Route, useNavigate } from "react-router";
 import ManageUser from "../pages/Admin/Manage-User";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import { useEffect } from "react";
 
 const PrivateRouters = ({ role }) => {
+    const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(role);
-    }, [role]);
+        console.log("User Role:", role);
 
+        if (role !== "admin" && role !== "person") {
+            navigate("/");
+        }
+    }, [role, navigate]);
+
+    if (!role) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <div>
             <Routes>
                 {/* admin person */}
-                <Route path="dashboard" element={<Dashboard />} />
+                {(role === "admin" || role === "person") && <Route path="dashboard" element={<Dashboard />} />}
 
                 {/* admin */}
-                <Route path="manage-user" element={<ManageUser />} />
+                {role === "admin" && <Route path="manage-user" element={<ManageUser />} />}
+
             </Routes>
         </div>
     )
@@ -26,5 +35,9 @@ const PrivateRouters = ({ role }) => {
 PrivateRouters.propTypes = {
     role: PropTypes.string.isRequired,
 };
+
+PrivateRouters.defaultProps = {
+    role: "",
+}
 
 export default PrivateRouters

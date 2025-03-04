@@ -84,9 +84,7 @@ exports.signIn = async (req, res) => {
 
     try {
       const signJwt = promisify(jwt.sign);
-      const token = await signJwt(payload, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
+      const token = await signJwt(payload, process.env.JWT_SECRET);
 
       res.status(200).json({
         message: "signIn Success.",
