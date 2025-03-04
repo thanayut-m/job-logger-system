@@ -16,7 +16,7 @@ exports.signUp = async (req, res) => {
     });
 
     if (existingUser) {
-      res.status(400).json({ message: "User is already in use" });
+      return res.status(400).json({ message: "User is already in use" });
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
