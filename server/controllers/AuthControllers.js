@@ -1,5 +1,9 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("@prisma/client");
+const { promisify } = require("util");
+
+require("dotenv").config();
 
 const prisma = new PrismaClient();
 
@@ -40,5 +44,59 @@ exports.signUp = async (req, res) => {
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ error: "Server Error" });
+  }
+};
+
+exports.signIn = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+      return res.status(400).json({
+        message: "Missing required fields",
+      });
+    }
+
+    const checkUsername = await prisma.user.findUnique({
+      where: { username: username },
+    });
+
+    if (!checkUsername || checkUsername.status !== true) {
+      return res.status(400).json({ message: "User not found or disabled!" });
+    }
+
+    const isMatch = await bcrypt.compare(password, checkUsername.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials!" });
+    }
+
+    await prisma.user.update({
+      where: { username: username },
+      data: {
+        users_update_at: new Date(),
+      },
+    });
+
+    const payload = {
+      user: { id: checkUsername.user_id },
+    };
+
+    try {
+      const signJwt = promisify(jwt.sign);
+      const token = await signJwt(payload, process.env.JWT_SECRET, {
+        expiresIn: "1h",
+      });
+
+      res.status(200).json({
+        message: "signIn Success.",
+        token: token,
+      });
+    } catch (jwtError) {
+      console.error("JWT Sign Error:", jwtError);
+      res.status(500).json({ message: "Failed to generate token" });
+    }
+  } catch (err) {
+    res.status(500).send("Server Error!!!");
   }
 };
