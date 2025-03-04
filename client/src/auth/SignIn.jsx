@@ -4,8 +4,12 @@ import Buttons from './../components/Buttons';
 import FormInput from '../components/FormInput';
 import { zodResolver } from '@hookform/resolvers/zod/src/zod.js';
 import { signinSchema } from '../utils/Schema';
+import { signIn } from '../functions/Auth';
+import { useNavigate } from 'react-router';
 
 const SignIn = () => {
+
+    const navigate = useNavigate();
     const { register, handleSubmit, formState } = useForm({
         resolver: zodResolver(signinSchema)
     });
@@ -15,9 +19,7 @@ const SignIn = () => {
     // console.log(isSubmitting, errors)
 
     const handleSignIn = async (data) => {
-        await new Promise((resolver) => setTimeout(resolver, 1000))
-
-        console.log(data);
+        signIn(data, navigate);
     }
 
     return (
