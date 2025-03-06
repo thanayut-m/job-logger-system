@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router';
+import { signOut } from "../../functions/Auth";
 import DrawerToggle from "./DrawerToggle";
 import EmployeeInfo from "./EmployeeInfo"
 import Logo from "./Logo"
@@ -9,6 +11,12 @@ const Navbar = ({
     fullname,
     role
 }) => {
+    const navigate = useNavigate();
+
+    const handleSignOut = () => {
+        signOut(navigate);
+    }
+
     return (
         <div className="bg-amber-600 py-2 px-3 flex justify-between items-center shadow-2xl w-full">
             <div className="flex gap-4 items-center">
@@ -21,7 +29,9 @@ const Navbar = ({
                     fullname={fullname}
                     role={role}
                 />
-                <SignOut />
+                <SignOut
+                    onClick={handleSignOut}
+                />
             </div>
         </div>
 

@@ -14,6 +14,7 @@ const AppRouters = () => {
 
     const fetchUserRole = async () => {
         const idToken = localStorage.getItem(import.meta.env.VITE_SET_TOKEN);
+        console.log("idToken :" + idToken)
 
         if (!idToken) {
             setRole("");
@@ -25,7 +26,8 @@ const AppRouters = () => {
             const res = await currenUser(idToken);
             console.log("Role จาก API:", res?.data?.role);
             setRole(res?.data?.role ?? "");
-            setFullName(res?.data?.first_name + " " + res?.data?.last_name);
+            const fullName = res?.data?.first_name + " " + res?.data?.last_name;
+            setFullName(fullName);
             console.log("AppRouters : " + fullName)
         } catch (err) {
             console.error("Token Invalid:", err);

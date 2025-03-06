@@ -48,3 +48,19 @@ export const currenUser = async (isToken) => {
     }
 
 }
+
+export const signOut = async (navigate) => {
+    try {
+        const isToken = localStorage.getItem(VITE_SET_TOKEN)
+        if (!isToken) {
+            console.log("No token found in localStorage, redirecting...")
+            navigate("/")
+        } else {
+            console.log("remove Token:" + isToken)
+            localStorage.removeItem(VITE_SET_TOKEN)
+            navigate("/")
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
