@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 const AppRouters = () => {
     const [role, setRole] = useState("");
     const [loading, setLoading] = useState(true);
+    const [fullName, setFullName] = useState("")
+
+
     const location = useLocation();
 
     const fetchUserRole = async () => {
@@ -20,8 +23,10 @@ const AppRouters = () => {
 
         try {
             const res = await currenUser(idToken);
-            // console.log("Role จาก API:", res?.data?.role);
+            console.log("Role จาก API:", res?.data?.role);
             setRole(res?.data?.role ?? "");
+            setFullName(res?.data?.first_name + " " + res?.data?.last_name);
+            console.log("AppRouters : " + fullName)
         } catch (err) {
             console.error("Token Invalid:", err);
             setRole("");
@@ -47,9 +52,12 @@ const AppRouters = () => {
                 <Route path="/*" element={<PublicRouters />} />
 
                 {/* Private Page */}
-                <Route path="/private/*" element={<PrivateRouters
-                    role={role}
-                />}
+                <Route
+                    path="/private/*"
+                    element={<PrivateRouters
+                        role={role}
+                        fullname={fullName}
+                    />}
                 />
 
             </Routes>
