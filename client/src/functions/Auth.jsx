@@ -1,6 +1,8 @@
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 const { VITE_API_PATH, VITE_SET_TOKEN } = import.meta.env
+
 
 export const signUp = async (data, navigate) => {
     try {
@@ -25,6 +27,14 @@ export const signIn = async (data, navigate) => {
 
         if (message === "signIn Success.") {
             localStorage.setItem(VITE_SET_TOKEN, result.data.token)
+
+            await Swal.fire({
+                title: "เข้าสู่ระบบสำเร็จ",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1500
+            })
+
             navigate("private/dashboard")
         }
     } catch (err) {
@@ -56,8 +66,16 @@ export const signOut = async (navigate) => {
             console.log("No token found in localStorage, redirecting...")
             navigate("/")
         } else {
-            console.log("remove Token:" + isToken)
+            // console.log("remove Token:" + isToken)
             localStorage.removeItem(VITE_SET_TOKEN)
+
+            await Swal.fire({
+                title: "ออกจากระบบ",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1500
+            })
+
             navigate("/")
         }
     } catch (err) {

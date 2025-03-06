@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Routes, Route, useNavigate } from "react-router";
 import ManageUser from "../pages/Admin/Manage-User";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PrivateLayouts from "../Layouts/PrivateLayouts";
 
 const PrivateRouters = ({
@@ -10,14 +10,21 @@ const PrivateRouters = ({
     fullname
 }) => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (!role) {
+            setLoading(true);
+            return;
+        }
+        setLoading(false);
+
         if (role !== "admin" && role !== "person") {
             navigate("/");
         }
     }, [role, navigate]);
 
-    if (!role) {
+    if (loading) {
         return <p>Loading...</p>;
     }
 
