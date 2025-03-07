@@ -20,7 +20,7 @@ export const signUp = async (data, navigate) => {
 
 export const signIn = async (data, navigate) => {
     try {
-        await new Promise((resolve) => setTimeout(resolve, 1000))
+        // await new Promise((resolve) => setTimeout(resolve, 1000))
 
         const result = await axios.post(VITE_API_PATH + "/auth/signIn", data);
         const message = result.data.message

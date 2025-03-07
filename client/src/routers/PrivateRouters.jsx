@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { Routes, Route, useNavigate } from "react-router";
-import ManageUser from "../pages/Admin/Manage-User";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import { useEffect, useState } from "react";
 import PrivateLayouts from "../Layouts/PrivateLayouts";
+import ManageUser from "../pages/Admin/Manage_User/Manage_User";
 
 const PrivateRouters = ({
     role,

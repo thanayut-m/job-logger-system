@@ -8,7 +8,6 @@ const Dashboard = () => {
         <div className="flex flex-col gap-3">
             <CardTitle />
             <CardDetail />
-
         </div>
     )
 }
