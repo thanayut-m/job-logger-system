@@ -8,7 +8,7 @@ const { isLogin } = require("../middlewares/AuthMiddleware");
 const router = express.Router();
 
 router.get("/memberInfo", isLogin, memberInfo);
-router.post("/memberInfoPage", memberInfoPage);
+router.post("/memberInfoPage", isLogin, memberInfoPage);
 // router.post("/memberInfo", isLogin, memberInfo);
 // router.put("/memberInfo", isLogin, memberInfo);
 // router.delete("/memberInfo", isLogin, memberInfo);
