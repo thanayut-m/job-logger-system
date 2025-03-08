@@ -20,9 +20,6 @@ const ManageUser = () => {
             <CardDetailManageUser
             manageUserInfo={manageUserInfo}
             />
-
-            
-
         </div>
     )
 }
