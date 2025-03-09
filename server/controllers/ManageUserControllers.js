@@ -5,6 +5,7 @@ exports.memberInfo = async (req, res) => {
   try {
     const result = await prisma.user.findMany({
       select: {
+        user_id: true,
         username: true,
         password: true,
         first_name: true,
@@ -24,16 +25,17 @@ exports.memberInfo = async (req, res) => {
 exports.memberInfoPage = async (req, res) => {
   try {
     let { page, limit } = req.body;
-    console.log(page, limit);
+    // console.log(page, limit);
 
     page = parseInt(page) || 1;
     limit = parseInt(limit) || 10;
 
     const skip = (page - 1) * limit;
-    console.log(skip);
+    // console.log(skip);
 
     const result = await prisma.user.findMany({
       select: {
+        user_id: true,
         username: true,
         first_name: true,
         last_name: true,

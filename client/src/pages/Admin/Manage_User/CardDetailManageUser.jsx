@@ -1,22 +1,67 @@
 import PropTypes from "prop-types";
+import DataTable from 'react-data-table-component';
+
 
 const CardDetailManageUser = ({
-    manageUserInfo
+    manageUserInfo,
+    totalRows,
+    handlePageChange,
+    handlePerRowsChange
 }) => {
 
+    const columns = [
+        {
+            name: 'ลำดับ',
+            selector: (row, index) => index + 1,
+            sortable: true,
+        },
+        {
+            name: 'Username',
+            selector: row => row.username,
+            sortable: true,
+        },
+        {
+            name: 'name',
+            selector: row => `${row.first_name ?? ''} ${row.last_name ?? ''}`.trim(),
+            sortable: true,
+        },
+        {
+            name: 'ตำแหน่ง',
+            selector: row => row.role,
+            sortable: true,
+        },
+        {
+            name: 'สถานะ',
+            cell: row => {
+                const isActive = row.status === true || row.status === "true" || row.status === 1 || row.status === "1";
+
+                return (
+                    <span
+                        className={`px-2 py-1 rounded-full text-white text-sm font-medium ${isActive ? "bg-green-700" : "bg-red-700"
+                            }`}
+                    >
+                        {isActive ? "เปิดใช้งาน" : "ปิดใช้งาน"}
+                    </span>
+                );
+            },
+            sortable: true,
+        },
+    ];
+
+
     return (
-        <div className="bg-white rounded-xl shadow-2xl p-3 grid grid-cols-6 gap-3 items-end ">
-            <div className="flex flex-col">
+        <div className="bg-white rounded-xl shadow-2xl p-3  gap-3 items-end ">
+            <div className='w-full'>
                 {manageUserInfo.length > 0 ? (
-                    manageUserInfo.map((user, index) => (
-                        <div key={index}>
-                            {user.username}
-                            {user.first_name}
-                            {user.last_name}
-                            {user.role}
-                            {user.status}
-                        </div>
-                    ))
+                    <DataTable
+                        columns={columns}
+                        data={manageUserInfo}
+                        pagination
+                        paginationServer
+                        paginationTotalRows={totalRows}
+                        onChangeRowsPerPage={handlePerRowsChange}
+                        onChangePage={handlePageChange}
+                    />
                 ) : (
                     <p>Loading...</p>
                 )}
@@ -35,6 +80,10 @@ CardDetailManageUser.propTypes = {
             status: PropTypes.string.isRequired,
         })
     ).isRequired,
+    totalRows: PropTypes.number.isRequired,
+    handlePageChange: PropTypes.func.isRequired,
+    handlePerRowsChange: PropTypes.func.isRequired,
 };
+
 
 export default CardDetailManageUser
