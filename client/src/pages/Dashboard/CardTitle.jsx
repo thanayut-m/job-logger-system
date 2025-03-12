@@ -2,7 +2,6 @@ import FormInputDate from "../../components/FormInputDate";
 import FormInput from "../../components/FormInput";
 import { useForm } from "react-hook-form";
 import FormSelect from "../../components/FormSelect";
-import DashboardModal from "./Modal/DashboardModal";
 
 
 const CardTitle = () => {
@@ -55,9 +54,9 @@ const CardTitle = () => {
                     options={menuOptions}
                 />
             </div>
-            <div className=" flex justify-end items-end">
+            {/* <div className=" flex justify-end items-end">
                 <DashboardModal />
-            </div>
+            </div> */}
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import DataTable from 'react-data-table-component';
+import DashboardModal from "./Modal/DashboardModal";
 
 
 const CardDetailManageUser = ({
@@ -46,11 +47,19 @@ const CardDetailManageUser = ({
             },
             sortable: true,
         },
+        {
+
+            cell: row => <>
+                <DashboardModal />
+            </>
+            ,
+            sortable: false,
+        },
     ];
 
 
     return (
-        <div className="bg-white rounded-xl shadow-2xl p-3  gap-3 items-end ">
+        <div className="bg-white rounded-xl shadow-2xl p-3 items-end ">
             <div className='w-full'>
                 {manageUserInfo.length > 0 ? (
                     <DataTable

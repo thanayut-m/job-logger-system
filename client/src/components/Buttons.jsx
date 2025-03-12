@@ -2,30 +2,28 @@ import PropTypes from "prop-types";
 
 const Buttons = ({
     type = "button",
-    text,
+    children,
     isSubmitting = false,
-    onClick
+    onClick,
+    className
 }) => {
     return (
         <button
             type={type}
             disabled={isSubmitting}
             onClick={onClick}
-            className="bg-blue-600 hover:bg-blue-400 p-2 rounded-xl w-full opacity-100">
-            {
-                isSubmitting
-                    ? <p className="font-semibold text-lg">Please wait...</p>
-                    : <p className="font-semibold text-lg" >{text}</p>
-            }
+            className={`font-semibold flex justify-center p-3 rounded-xl ${className}`}>
+            {isSubmitting ? <p className="font-semibold text-lg">Please wait...</p> : children}
         </button>
     )
 }
 
 Buttons.propTypes = {
     isSubmitting: PropTypes.bool,
-    text: PropTypes.string,
+    children: PropTypes.node.isRequired,
     type: PropTypes.string,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    className: PropTypes.string
 }
 
 Buttons.defaultProps = {

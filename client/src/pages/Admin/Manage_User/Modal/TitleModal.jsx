@@ -1,6 +1,6 @@
 const TitleModal = () => {
     return (
-        <div>TitleModal</div>
+        <div>ผู้ใช้งาน</div>
     )
 }
 export default TitleModal

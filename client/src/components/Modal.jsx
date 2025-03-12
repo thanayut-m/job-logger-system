@@ -1,25 +1,12 @@
-import { useRef } from "react";
 import PropTypes from "prop-types";
-import Buttons from './Buttons';
+import { forwardRef } from "react";
 
-const Modal = ({ title, detail, footer, label }) => {
-    const modalRef = useRef(null);
-
-    const openModal = () => {
-        if (modalRef.current) {
-            modalRef.current.showModal();
-        }
-    };
+const Modal = forwardRef(({ title, detail, footer, size }, ref) => {
 
     return (
         <div className="w-full">
-            <Buttons
-                type="button"
-                text={label}
-                onClick={openModal}
-            />
-            <dialog ref={modalRef} className="modal">
-                <div className="modal-box max-w-5xl w-full h-[90%] flex flex-col">
+            <dialog ref={ref} className="modal">
+                <div className={`modal-box w-full flex flex-col ${size}`}>
                     {/* ปุ่มปิด Modal */}
                     <form method="dialog">
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -46,12 +33,14 @@ const Modal = ({ title, detail, footer, label }) => {
 
         </div>
     )
-}
+});
+
+Modal.displayName = "Modal";
 
 Modal.propTypes = {
     title: PropTypes.string.isRequired,
     detail: PropTypes.string.isRequired,
     footer: PropTypes.node,
-    label: PropTypes.string.isRequired
+    size: PropTypes.string
 };
 export default Modal
