@@ -7,6 +7,8 @@ const Buttons = ({
     onClick,
     className
 }) => {
+
+    console.log(isSubmitting)
     return (
         <button
             type={type}

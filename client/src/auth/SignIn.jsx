@@ -45,9 +45,9 @@ const SignIn = () => {
                     <div className='mt-3 mb-9'>
                         <Buttons
                             type="submit"
-                            text="เข้าสู่ระบบ"
                             isSubmitting={isSubmitting}
-                        />
+                            className="bg-blue-500 hover:bg-blue-400 hover:text-white w-full"
+                        >เข้าสู่ระบบ</Buttons>
                     </div>
                 </form>
             </div>
