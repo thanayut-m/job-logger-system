@@ -6,7 +6,7 @@ const FormSelect = ({ options, label, register, name }) => {
             <label htmlFor={name} className="text-xs font-bold text-black text-start">
                 {label}
             </label>
-            <select {...register(name)} className="select select-neutral w-full mt-1">
+            <select {...register(name)} className="select select-neutral w-full mt-1 text-black" >
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>
                         {option.text}

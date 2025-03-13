@@ -9,7 +9,7 @@ const Modal = forwardRef(({ title, detail, footer, size }, ref) => {
                 <div className={`modal-box w-full flex flex-col ${size}`}>
                     {/* ปุ่มปิด Modal */}
                     <form method="dialog">
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-black">
                             ✕
                         </button>
                     </form>

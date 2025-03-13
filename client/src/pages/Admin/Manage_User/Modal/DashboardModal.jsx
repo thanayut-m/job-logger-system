@@ -5,9 +5,13 @@ import DetailModal from './DetailModal';
 import FooterModal from "./FooterModal";
 import { FaUserEdit } from "react-icons/fa";
 import FormModal from '../../../../components/FormModal.jsx';
+import PropTypes from 'prop-types';
 
 
-const DashboardModal = () => {
+const DashboardModal = ({
+    children,
+    className
+}) => {
     const { register, handleSubmit } = useForm();
 
 
@@ -24,16 +28,20 @@ const DashboardModal = () => {
         <div>
             <FormModal
                 size="max-w-2xl"
-                className="bg-amber-500 hover:bg-amber-400 hover:text-white"
+                className={className ? { className } : `bg-amber-500 hover:bg-amber-400 hover:text-white`}
                 title={<TitleModal />}
                 detail={<DetailModal register={register} />}
                 footer={<FooterModal onSubmit={handleSubmit(onSubmit)} onClose={onClose} />}
             >
-                <FaUserEdit />
+                {children ? children : <FaUserEdit />}
             </FormModal>
         </div>
     )
 }
 
+DashboardModal.propTypes = {
+    children: PropTypes.node.isRequired,
+    className: PropTypes.string,
+}
 
 export default DashboardModal
