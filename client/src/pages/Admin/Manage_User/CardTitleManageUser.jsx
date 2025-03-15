@@ -1,5 +1,6 @@
+import Modals from "../../../components/MUI/Modals"
 
-import DashboardModal from "./Modal/DashboardModal";
+
 
 const CardTitleManageUser = () => {
 
@@ -8,11 +9,14 @@ const CardTitleManageUser = () => {
             <div className="flex justify-between" >
                 <div> จัดการผู้ใช้งาน</div>
                 <div className='bg-blue-500 hover:bg-blue-400 hover:text-white rounded-xl gap2 flex flex-row items-center'>
-                    <DashboardModal
-                        className="bg-blue-500 hover:bg-blue-400 hover:text-white"
-                    >สร้างผู้ใช้งาน
+                    <Modals
+                        titleModal="asdasd"
+                        detailModal="asdasd"
+                        footerModal="asdsd"
 
-                    </DashboardModal>
+                    >
+                        test
+                    </Modals>
                 </div>
             </div>
         </div>

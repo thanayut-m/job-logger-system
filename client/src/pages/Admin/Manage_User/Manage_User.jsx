@@ -2,39 +2,59 @@ import { useEffect, useState } from "react"
 import { ManageUserInfo } from "../../../functions/member"
 import CardDetailManageUser from "./CardDetailManageUser"
 import CardTitleManageUser from "./CardTitleManageUser"
+import { useForm } from "react-hook-form"
 
 const ManageUser = () => {
     const [manageUserInfo, setManageUserInfo] = useState([]);
-    const [totalRows, setTotalRows] = useState(3);
-    const [perPage, setPerPage] = useState(10);
-    const [currentPage] = useState(1);
+    const { register, handleSubmit } = useForm();
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
 
-    const fetchData = async (page, limit) => {
-        await ManageUserInfo(setManageUserInfo, page, limit, setTotalRows);
+    const fetchData = async () => {
+        ManageUserInfo(setManageUserInfo);
     };
 
     useEffect(() => {
-        fetchData(currentPage, perPage);
-    }, [currentPage, perPage]);
+        fetchData();
+    }, []);
 
-    const handlePageChange = page => {
-        fetchData(page, perPage)
+    const handleChangePage = (_, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
+
+    const menuItems = [
+        { value: "admin", name: "mgr" },
+        { value: "person", name: "sa" },
+
+    ];
+
+    const handleSaveManageUsers = (data) => {
+        console.log(data)
+
     }
 
-    const handlePerRowsChange = async (newPerPage, page) => {
-        setPerPage(newPerPage);
-        fetchData(page, newPerPage)
-    }
 
     return (
         <div className="flex flex-col gap-3">
             <CardTitleManageUser />
             <CardDetailManageUser
                 manageUserInfo={manageUserInfo}
-                totalRows={totalRows}
-                handlePageChange={handlePageChange}
-                handlePerRowsChange={handlePerRowsChange}
+                totalRows={manageUserInfo.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                menuItems={menuItems}
+                handleSaveManageUsers={handleSaveManageUsers}
+                register={register}
+                onClick={handleSubmit(handleSaveManageUsers)}
             />
         </div>
     )

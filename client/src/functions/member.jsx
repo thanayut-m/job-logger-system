@@ -5,19 +5,13 @@ const { VITE_API_PATH } = import.meta.env
 
 export const ManageUserInfo = async (
     setManageUserInfo,
-    page,
-    limit,
-    setTotalRows
 ) => {
     try {
-        const res = await axios.post(VITE_API_PATH + `/Manage_User/memberInfoPage`, {
-            page,
-            limit
-        }, api.headers())
+        const res = await axios.get(VITE_API_PATH + `/Manage_User/memberInfo`, api.headers())
 
         if (res.data.message === "success") {
+            // console.log("ManageUserInfo" + res.data)
             setManageUserInfo(res.data.result);
-            setTotalRows(res.data.totalRecords);
         }
 
     } catch (err) {
