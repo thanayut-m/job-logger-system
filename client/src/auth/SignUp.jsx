@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form"
 import AuthLayouts from "../Layouts/AuthLayouts"
 import FormInput from "../components/FormInput";
-import Buttons from "../components/Buttons";
 import { zodResolver } from './../../node_modules/@hookform/resolvers/zod/src/zod';
 import { signUpSchema } from "../utils/Schema";
 import { signUp } from "../functions/Auth";
@@ -77,11 +76,11 @@ const SignUp = () => {
                     </div>
 
                     <div className="mt-3 mb-9">
-                        <Buttons
+                        {/* <Buttons
                             type="submit"
                             text="สมัครสมาชิก"
                             isSubmitting={isSubmitting}
-                        />
+                        /> */}
 
                     </div>
                 </form>

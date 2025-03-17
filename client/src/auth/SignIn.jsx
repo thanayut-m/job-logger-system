@@ -1,6 +1,6 @@
 import AuthLayouts from './../Layouts/AuthLayouts';
 import { useForm } from "react-hook-form";
-import Buttons from './../components/Buttons';
+// import Buttons from './../components/Buttons';
 import FormInput from '../components/FormInput';
 import { zodResolver } from '@hookform/resolvers/zod/src/zod.js';
 import { signinSchema } from '../utils/Schema';
@@ -15,7 +15,7 @@ const SignIn = () => {
     });
 
 
-    const { errors, isSubmitting } = formState
+    const { errors } = formState
     // console.log(isSubmitting, errors)
 
     const handleSignIn = async (data) => {
@@ -43,11 +43,11 @@ const SignIn = () => {
                         label="Password"
                     />
                     <div className='mt-3 mb-9'>
-                        <Buttons
+                        {/* <Buttons
                             type="submit"
                             isSubmitting={isSubmitting}
                             className="bg-blue-500 hover:bg-blue-400 hover:text-white w-full"
-                        >เข้าสู่ระบบ</Buttons>
+                        >เข้าสู่ระบบ</Buttons> */}
                     </div>
                 </form>
             </div>

@@ -21,6 +21,7 @@
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
+    "password-generator": "^2.3.2",
     "react": "^19.0.0",
     "react-data-table-component": "^7.7.0",
     "react-datepicker": "^8.1.0",

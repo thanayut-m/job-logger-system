@@ -7,6 +7,7 @@ const Buttons = ({
     backgroundColor,
     hoverBackgroundColor,
     onClick,
+    onClose
 }) => {
     return (
         <Button

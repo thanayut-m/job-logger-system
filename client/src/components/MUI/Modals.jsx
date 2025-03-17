@@ -2,34 +2,22 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Buttons from './Buttons';
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const Modals = ({
-    children,
     titleModal,
     detailModal,
     footerModal,
-    backgroundColor,
-    hoverBackgroundColor,
-    moDalWidth
+    moDalWidth,
+    modalName,
+    open,
+    onClick
 }) => {
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
     return (
         <div>
-            <Buttons
-                variant="contained"
-                onClick={handleOpen}
-                backgroundColor={backgroundColor}
-                hoverBackgroundColor={hoverBackgroundColor}
-            >
-                {children}
-            </Buttons>
             <Modal
-                open={open}
+                open={open === modalName}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -77,7 +65,7 @@ const Modals = ({
                     >
                         <Buttons
                             variant="contained"
-                            onClick={handleClose}
+                            onClick={onClick}
                             backgroundColor="#FF0000"
                             hoverBackgroundColor="#FFA500"
                         >

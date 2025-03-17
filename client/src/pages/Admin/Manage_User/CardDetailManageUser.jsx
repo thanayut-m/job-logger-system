@@ -10,78 +10,237 @@ import PropTypes from 'prop-types';
 import Buttons from '../../../components/MUI/Buttons';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import Switches from '../../../components/MUI/switches';
-import ModalManageUsers from './ModalManageUsers/ModalManageUsers';
+import { format } from "date-fns";
+import { th } from "date-fns/locale";
+import { useEffect, useState } from 'react';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import Modals from '../../../components/MUI/Modals';
+import Title from './ModalManageUsers/Title';
+import Detail from './ModalManageUsers/Detail';
+import Footer from './ModalManageUsers/Footer';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import { api } from '../../../functions/Api';
+import Swal from 'sweetalert2';
+import { ManageUserInfo } from '../../../functions/member';
+import Title_ResetPassword from './ModalResetPassword/Title_ResetPassword';
+import Detail_ResetPassword from './ModalResetPassword/Detail_ResetPassword';
+import Footer_ResetPassword from './ModalResetPassword/Footer_ResetPassword';
+
+
+const { VITE_API_PATH } = import.meta.env
 
 const CardDetailManageUser = ({
-    manageUserInfo,
-    onPageChange,
-    onRowsPerPageChange,
-    totalRows,
-    rowsPerPage,
-    page,
-    menuItems,
-    register,
-    onClick
+    menuItems
 }) => {
+    const { register, reset, handleSubmit } = useForm();
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [manageUserInfo, setManageUserInfo] = useState([]);
+
+    const [openModal, setOpenModal] = useState(null);
+    const [selectUser, setSelectUser] = useState(null)
+    const [resetPassword, setResetPassword] = useState(null)
+    const [randomPassword, setRandomPassword] = useState('');
+
+    const handleOpen = (modal, user) => {
+        setOpenModal(modal)
+        setSelectUser(user)
+        setResetPassword(user)
+        reset(user)
+    };
+    const handleClose = () => {
+        setOpenModal(null)
+    };
+
+    const handleChangePage = (_, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
+    const fetchData = async () => {
+        ManageUserInfo(setManageUserInfo);
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const handleSaveManageUsers = async (data) => {
+        try {
+            console.log(data)
+            const res = await axios.put(VITE_API_PATH + `/Manage_User/updateMember`, data, api.headers());
+            console.log(res)
+
+            if (res.data.message === 'success') {
+                Swal.fire({
+                    title: "แก้ไขข้อมูลสำเร็จ",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                handleClose();
+                fetchData();
+            }
+        } catch (err) {
+            console.log("Error : " + err);
+            return null;
+        }
+    }
+
+    const generateRandomPassword = () => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+        let password = '';
+        const passwordLength = 5;
+
+        for (let i = 0; i < passwordLength; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            password += characters[randomIndex];
+        }
+
+        setRandomPassword(password);
+
+    };
+
+    const handleSaveResetPassword = async (data) => {
+        try {
+            console.log(data)
+        } catch (err) {
+            console.log("Error : " + err);
+            return null;
+        }
+    }
+
     return (
-        <Paper sx={{ width: '100%', overflow: 'hidden', borderRadius: '16px' }}>
-            <TableContainer >
-                <Table
-                    stickyHeader
-                    aria-label="sticky table "
-                    size='small'
-                >
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>ลำดับ</TableCell>
-                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>ชื่อผู้ใช้</TableCell>
-                            <TableCell align="center" sx={{ fontWeight: 'bold' }} >ชื่อ-สกุล</TableCell>
-                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>ตำแหน่ง</TableCell>
-                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>สถานะ</TableCell>
-                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Action</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {manageUserInfo
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row, index) => (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id || index}>
-                                    <TableCell align="center">{index + 1 + page * rowsPerPage}</TableCell>
-                                    <TableCell align="center">{row.username}</TableCell>
-                                    <TableCell align="center">{`${row.first_name} ${row.last_name}`}</TableCell>
-                                    <TableCell align="center">{row.role}</TableCell>
-                                    <TableCell align="center">
-                                        <Switches checked={Boolean(row.status)} />
-                                    </TableCell>
-                                    <TableCell sx={{ display: "flex", gap: 1, justifyContent: "center" }}>
-                                        <ModalManageUsers
-                                            menuItems={menuItems}
-                                            onClick={onClick}
-                                            register={register}
-                                        />
-                                        <Buttons
-                                            variant="contained"
-                                            backgroundColor="#FFD700"
-                                            hoverBackgroundColor="#EEDD82"
-                                        >
-                                            <LockResetIcon />
-                                        </Buttons>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={totalRows}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={onPageChange}
-                onRowsPerPageChange={onRowsPerPageChange}
-            />
-        </Paper >
+        <div>
+            <Paper sx={{ width: '100%', overflow: 'hidden', borderRadius: '16px' }}>
+                <TableContainer >
+                    <Table
+                        stickyHeader
+                        aria-label="sticky table "
+                        size='small'
+                    >
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center" sx={{ fontWeight: 'bold' }}>ลำดับ</TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold' }}>ชื่อผู้ใช้</TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold' }} >ชื่อ-สกุล</TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold' }}>ตำแหน่ง</TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold' }}>สถานะ</TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold' }}>เข้าสู่ระบบล่าสุด</TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold' }}>Action</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {manageUserInfo
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((row, index) => (
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id || index}>
+                                        <TableCell align="center">{index + 1 + page * rowsPerPage}</TableCell>
+                                        <TableCell align="center">{row.username}</TableCell>
+                                        <TableCell align="center">{`${row.first_name} ${row.last_name}`}</TableCell>
+                                        <TableCell align="center">{row.role}</TableCell>
+                                        <TableCell align="center">
+                                            <Switches checked={Boolean(row.status)} />
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            {row.users_update_at
+                                                ? format(new Date(row.users_update_at), "dd/MM/yyyy HH:mm", { locale: th })
+                                                : "N/A"}
+                                        </TableCell>
+                                        <TableCell sx={{ display: "flex", gap: 1, justifyContent: "center" }}>
+                                            <Buttons
+                                                variant="contained"
+                                                backgroundColor="#FF9900"
+                                                hoverBackgroundColor="#FF9999"
+                                                onClick={() => handleOpen("modalUpdateUsers", row)}
+                                            >
+                                                <ManageAccountsIcon />
+                                            </Buttons>
+                                            <Buttons
+                                                variant="contained"
+                                                backgroundColor="#FFD700"
+                                                hoverBackgroundColor="#EEDD82"
+                                                onClick={() => {
+                                                    generateRandomPassword();
+                                                    handleOpen("modalResetPassword", row)
+                                                }}
+                                            >
+                                                <LockResetIcon />
+                                            </Buttons>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={manageUserInfo.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper >
+
+            {selectUser && (
+                <Modals
+                    open={openModal}
+                    onClick={() => {
+                        handleOpen();
+                        handleClose();
+                    }}
+                    modalName="modalUpdateUsers"
+                    moDalWidth="40%"
+
+                    titleModal={<Title />}
+                    detailModal={<Detail
+                        menuItems={menuItems}
+                        register={register}
+                        row={selectUser}
+                    />}
+                    footerModal={<Footer
+                        onClick={handleSubmit(handleSaveManageUsers)}
+                    />}
+
+                />
+            )}
+
+            {resetPassword && (
+                <Modals
+                    open={openModal}
+                    onClick={() => {
+                        handleOpen();
+                        handleClose();
+                    }}
+                    modalName="modalResetPassword"
+                    moDalWidth="50%"
+
+                    titleModal={
+                        <Title_ResetPassword />
+                    }
+                    detailModal={
+                        <Detail_ResetPassword
+                            row={resetPassword}
+                            randomPassword={randomPassword}
+                            register={register}
+                        />
+                    }
+                    footerModal={
+                        <Footer_ResetPassword
+                            onClick={handleSubmit(handleSaveResetPassword)} />
+                    }
+                />
+            )}
+
+        </div>
     );
 };
 

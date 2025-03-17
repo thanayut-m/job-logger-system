@@ -12,6 +12,7 @@ exports.memberInfo = async (req, res) => {
         last_name: true,
         role: true,
         status: true,
+        users_update_at: true,
       },
     });
     console.log(result);
@@ -53,6 +54,30 @@ exports.memberInfoPage = async (req, res) => {
       message: "success",
       totalPages: totalPages,
       totalRecords: totalRecords,
+      result: result,
+    });
+  } catch (err) {
+    res.status(500).json("Server Error! : " + err);
+  }
+};
+
+exports.updateMember = async (req, res) => {
+  try {
+    const { user_id, first_name, last_name, role, username } = req.body;
+
+    const result = await prisma.user.update({
+      where: {
+        user_id: parseInt(user_id),
+      },
+      data: {
+        first_name: first_name,
+        last_name: last_name,
+        role: role,
+        username: username,
+      },
+    });
+    res.status(200).json({
+      message: "success",
       result: result,
     });
   } catch (err) {

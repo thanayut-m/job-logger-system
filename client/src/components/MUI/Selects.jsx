@@ -3,24 +3,16 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useState } from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from 'prop-types';
 
 const Selects = ({
     children,
     menuItems,
     register,
     name,
-    id
+    id,
+    defaultValue
 }) => {
-    const [selectedValue, setSelectedValue] = useState('');
-
-
-    const handleChange = (event) => {
-        setSelectedValue(event.target.value);
-    };
-
-
     return (
         <Box sx={{ minWidth: "120" }}>
             <FormControl fullWidth>
@@ -29,9 +21,8 @@ const Selects = ({
                     {...register(name)}
                     id={id || name}
                     labelId="demo-simple-select-label"
-                    value={selectedValue}
+                    defaultValue={defaultValue}
                     label={children}
-                    onChange={handleChange}
 
                 >
                     {menuItems.map((items) => (
@@ -57,5 +48,6 @@ Selects.propTypes = {
     register: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     id: PropTypes.string,
+    defaultValue: PropTypes.string,
 };
 export default Selects

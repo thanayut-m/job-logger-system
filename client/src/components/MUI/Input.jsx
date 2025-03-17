@@ -6,7 +6,9 @@ const Input = ({
     type,
     register,
     name,
-    id
+    id,
+    defaultValue,
+    disabled
 }) => {
     return (
         <TextField
@@ -14,7 +16,11 @@ const Input = ({
             id={id || name}
             label={label}
             type={type}
-            variant="outlined" />
+            defaultValue={defaultValue}
+            variant="outlined"
+            disabled={disabled}
+        />
+
     )
 }
 
@@ -24,6 +30,8 @@ Input.propTypes = {
     register: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     id: PropTypes.string,
+    defaultValue: PropTypes.string,
+    disabled: PropTypes.bool,
 };
 
 export default Input
