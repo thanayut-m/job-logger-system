@@ -66,17 +66,27 @@ export const signOut = async (navigate) => {
             console.log("No token found in localStorage, redirecting...")
             navigate("/")
         } else {
-            // console.log("remove Token:" + isToken)
-            localStorage.removeItem(VITE_SET_TOKEN)
-
             await Swal.fire({
-                title: "ออกจากระบบ",
                 icon: "success",
-                showConfirmButton: false,
-                timer: 1500
-            })
+                title: "ยืนยันออกจากระบบ",
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: "ตกลง",
+                cancelButtonText: "ยกเลิก"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // console.log("remove Token:" + isToken)
+                    localStorage.removeItem(VITE_SET_TOKEN)
+                    Swal.fire({
+                        title: "ออกจากระบบ",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
 
-            navigate("/")
+                    navigate("/");
+                }
+            })
         }
     } catch (err) {
         console.log(err);
