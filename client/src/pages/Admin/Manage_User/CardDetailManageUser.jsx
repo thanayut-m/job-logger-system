@@ -231,6 +231,7 @@ const CardDetailManageUser = ({
                             row={resetPassword}
                             randomPassword={randomPassword}
                             register={register}
+                            onClick={generateRandomPassword}
                         />
                     }
                     footerModal={

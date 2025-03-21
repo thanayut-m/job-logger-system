@@ -67,7 +67,7 @@ export const signOut = async (navigate) => {
             navigate("/")
         } else {
             await Swal.fire({
-                icon: "success",
+                icon: "warning",
                 title: "ยืนยันออกจากระบบ",
                 showCancelButton: true,
                 showConfirmButton: true,
@@ -81,7 +81,7 @@ export const signOut = async (navigate) => {
                         title: "ออกจากระบบ",
                         icon: "success",
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 1000
                     });
 
                     navigate("/");
