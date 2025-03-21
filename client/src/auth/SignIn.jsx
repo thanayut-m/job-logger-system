@@ -2,10 +2,11 @@ import AuthLayouts from './../Layouts/AuthLayouts';
 import { useForm } from "react-hook-form";
 // import Buttons from './../components/Buttons';
 import FormInput from '../components/FormInput';
-import { zodResolver } from '@hookform/resolvers/zod/src/zod.js';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { signinSchema } from '../utils/Schema';
 import { signIn } from '../functions/Auth';
 import { useNavigate } from 'react-router';
+import Buttons from './../components/MUI/Buttons';
 
 const SignIn = () => {
 
@@ -14,18 +15,17 @@ const SignIn = () => {
         resolver: zodResolver(signinSchema)
     });
 
-
-    const { errors } = formState
-    // console.log(isSubmitting, errors)
+    const { errors, isSubmitting } = formState;
 
     const handleSignIn = async (data) => {
-        signIn(data, navigate);
+        console.log(data)
+        await signIn(data, navigate);
     }
 
     return (
         <AuthLayouts>
             <div className="bg-white p-4 rounded-2xl w-full shadow-lg">
-                <form className="flex flex-col gap-3 w-3/4 mx-auto" onSubmit={handleSubmit(handleSignIn)}>
+                <form className="grid grid-cols-1 gap-3 w-3/4 mx-auto" onSubmit={handleSubmit(handleSignIn)}>
                     <h1 className="text-2xl text-center mt-9 font-bold text-black">เข้าสู่ระบบ</h1>
                     <FormInput
                         register={register}
@@ -41,14 +41,16 @@ const SignIn = () => {
                         type="password"
                         placeholder="Password..."
                         label="Password"
+                        errors={errors}
                     />
-                    <div className='mt-3 mb-9'>
-                        {/* <Buttons
-                            type="submit"
-                            isSubmitting={isSubmitting}
-                            className="bg-blue-500 hover:bg-blue-400 hover:text-white w-full"
-                        >เข้าสู่ระบบ</Buttons> */}
-                    </div>
+                    <Buttons
+                        variant="contained"
+                        type="submit"
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
+                    </Buttons>
+
                 </form>
             </div>
 

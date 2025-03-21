@@ -7,12 +7,15 @@ const Buttons = ({
     backgroundColor,
     hoverBackgroundColor,
     onClick,
-    onClose
+    disabled,
+    type
 }) => {
     return (
         <Button
-            onClick={onClick}
             variant={variant}
+            onClick={onClick}
+            type={type}
+            disabled={disabled}
             sx={{
                 backgroundColor: backgroundColor,
                 color: "white",
@@ -20,6 +23,7 @@ const Buttons = ({
                 py: 1,
                 minWidth: 40
             }}
+
         >
             {children}
         </Button>
