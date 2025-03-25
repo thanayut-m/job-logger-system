@@ -8,7 +8,8 @@ const Input = ({
     name,
     id,
     defaultValue,
-    disabled
+    disabled,
+    autocomplete
 }) => {
     return (
         <TextField
@@ -19,6 +20,7 @@ const Input = ({
             defaultValue={defaultValue}
             variant="outlined"
             disabled={disabled}
+            autocomplete={autocomplete}
         />
 
     )

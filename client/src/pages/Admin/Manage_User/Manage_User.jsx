@@ -1,7 +1,16 @@
+import { useState } from "react";
 import CardDetailManageUser from "./CardDetailManageUser"
 import CardTitleManageUser from "./CardTitleManageUser"
 
 const ManageUser = () => {
+    const [openModal, setOpenModal] = useState(null);
+
+    const handleOpen = (modal) => {
+        setOpenModal(modal)
+    };
+    const handleClose = () => {
+        setOpenModal(null)
+    };
 
 
     const menuItems = [
@@ -11,7 +20,12 @@ const ManageUser = () => {
 
     return (
         <div className="flex flex-col gap-3">
-            <CardTitleManageUser />
+            <CardTitleManageUser
+                openModal={openModal}
+                handleOpen={handleOpen}
+                handleClose={handleClose}
+                menuItems={menuItems}
+            />
             <CardDetailManageUser
                 menuItems={menuItems}
             />

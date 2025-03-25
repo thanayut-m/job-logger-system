@@ -198,7 +198,7 @@ const CardDetailManageUser = ({
                         handleClose();
                     }}
                     modalName="modalUpdateUsers"
-                    moDalWidth="40%"
+                    moDalWidth="50%"
 
                     titleModal={<Title />}
                     detailModal={<Detail
