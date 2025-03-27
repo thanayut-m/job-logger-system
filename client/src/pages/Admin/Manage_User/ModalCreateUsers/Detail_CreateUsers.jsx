@@ -4,17 +4,19 @@ import Selects from "../../../../components/MUI/Selects"
 
 const Detail_CreateUsers = ({
     menuItems,
-    register
+    register,
+    errors
 }) => {
 
     return (
-        <div className="grid grid-cols-2 gap-3">
+        <form autoComplete="off" className="grid grid-cols-2 gap-3">
             <Input
                 register={register}
                 name="first_name"
                 label="ชื่อ"
                 type="text"
                 variant="outlined"
+                errors={errors}
             />
             <Input
                 register={register}
@@ -22,6 +24,7 @@ const Detail_CreateUsers = ({
                 label="นามสกุล"
                 type="text"
                 variant="outlined"
+                errors={errors}
             />
             <div className="grid col-span-2">
                 <Input
@@ -30,6 +33,7 @@ const Detail_CreateUsers = ({
                     label="ชื่อผู้ใช้"
                     type="text"
                     variant="outlined"
+                    errors={errors}
                 />
             </div>
             <Input
@@ -39,6 +43,7 @@ const Detail_CreateUsers = ({
                 type="password"
                 variant="outlined"
                 autocomplete="new-password"
+                errors={errors}
             />
             <Input
                 register={register}
@@ -46,6 +51,7 @@ const Detail_CreateUsers = ({
                 label="ยืนยันรหัสผ่าน"
                 type="text"
                 variant="outlined"
+                errors={errors}
             />
             <div className="col-span-2">
                 <Selects
@@ -58,7 +64,7 @@ const Detail_CreateUsers = ({
                 </Selects>
 
             </div>
-        </div >
+        </form >
     )
 }
 export default Detail_CreateUsers

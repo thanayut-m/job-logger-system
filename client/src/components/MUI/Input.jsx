@@ -9,7 +9,7 @@ const Input = ({
     id,
     defaultValue,
     disabled,
-    autocomplete
+    errors = {}
 }) => {
     return (
         <TextField
@@ -20,7 +20,9 @@ const Input = ({
             defaultValue={defaultValue}
             variant="outlined"
             disabled={disabled}
-            autocomplete={autocomplete}
+            autoComplete="new-password"
+            error={!!errors[name]}
+            helperText={errors[name]?.message || ""}
         />
 
     )
@@ -34,6 +36,7 @@ Input.propTypes = {
     id: PropTypes.string,
     defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
+    errors: PropTypes.object,
 };
 
 export default Input

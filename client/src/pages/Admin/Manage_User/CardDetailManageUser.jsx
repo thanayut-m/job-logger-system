@@ -31,7 +31,7 @@ import Footer_ResetPassword from './ModalResetPassword/Footer_ResetPassword';
 const { VITE_API_PATH } = import.meta.env
 
 const CardDetailManageUser = ({
-    menuItems
+    menuItems,
 }) => {
     const { register, reset, handleSubmit } = useForm();
 

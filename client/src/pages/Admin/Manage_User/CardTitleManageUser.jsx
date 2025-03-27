@@ -6,6 +6,13 @@ import Detail_CreateUsers from "./ModalCreateUsers/Detail_CreateUsers";
 import Footer_CreateUsers from "./ModalCreateUsers/Footer_CreateUsers";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { zodResolver } from "@hookform/resolvers/zod/src/zod.js";
+import { signUpSchema } from "../../../utils/Schema";
+import axios from "axios";
+import { api } from "../../../functions/Api";
+
+
+const { VITE_API_PATH } = import.meta.env
 
 const CardTitleManageUser = ({
     openModal,
@@ -13,21 +20,32 @@ const CardTitleManageUser = ({
     handleClose,
     menuItems
 }) => {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState } = useForm({
+        resolver: zodResolver(signUpSchema)
+    });
 
-    const handleSaveUsers = (data) => {
+    const { errors } = formState
+    console.log(errors);
+
+    const handleSaveUsers = async (data) => {
         try {
-            console.log(data)
+            const res = await axios.post(VITE_API_PATH + `/Manage_User/createMember`, data, api.headers())
+            const message = res.data.message
 
-            Swal.fire({
-                icon: "success",
-                title: "สมัครสมาชิกสำเร็จ",
-                showConfirmButton: false,
-                timer: 1000
-            })
+            console.log(message)
 
-            reset();
-            handleClose();
+            if (message === "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "สมัครสมาชิกสำเร็จ",
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+                reset();
+                handleClose();
+            }
+
+
         } catch (err) {
             console.log("Error : " + err);
             return null;
@@ -62,11 +80,12 @@ const CardTitleManageUser = ({
                     handleClose();
                 }}
                 modalName="createUsers"
-                moDalWidth="40%"
+                moDalWidth="45%"
                 titleModal={<Title_CreateUsers />}
                 detailModal={<Detail_CreateUsers
                     register={register}
                     menuItems={menuItems}
+                    errors={errors}
                 />}
                 footerModal={<Footer_CreateUsers
                     onClick={handleSubmit(handleSaveUsers)} />}

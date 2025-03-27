@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const bcrypt = require("bcrypt");
 
 exports.memberInfo = async (req, res) => {
   try {
@@ -82,5 +83,38 @@ exports.updateMember = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json("Server Error! : " + err);
+  }
+};
+
+exports.createMember = async (req, res) => {
+  try {
+    const { first_name, last_name, password, role, username } = req.body;
+
+    const existingUser = await prisma.user.findUnique({
+      where: { username: username },
+    });
+
+    if (existingUser) {
+      res.status(400).json({ message: "User is already in use" });
+    }
+
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    const result = await prisma.user.create({
+      data: {
+        first_name: first_name,
+        last_name: last_name,
+        password: hashPassword,
+        role: role,
+        username: username,
+        status: true,
+      },
+    });
+    res.status(200).json({
+      message: "success",
+      result: result,
+    });
+  } catch (err) {
+    res.status(500).json("Server Error! :" + err);
   }
 };
