@@ -118,3 +118,37 @@ exports.createMember = async (req, res) => {
     res.status(500).json("Server Error! :" + err);
   }
 };
+
+exports.searchManageUser = async (req, res) => {
+  try {
+    console.log("search");
+    const { username, first_name, last_name } = req.query;
+
+    const result = await prisma.user.findMany({
+      where:
+        username || first_name || last_name
+          ? {
+              OR: [
+                username
+                  ? { username: { contains: username, mode: "insensitive" } }
+                  : {},
+                first_name
+                  ? { firstName: { contains: first_name, mode: "insensitive" } }
+                  : {},
+                last_name
+                  ? { lastName: { contains: last_name, mode: "insensitive" } }
+                  : {},
+              ],
+            }
+          : {},
+    });
+
+    res.status(200).json({
+      message: "success",
+      result: result,
+    });
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).json({ error: "Server Error!", details: err.message });
+  }
+};

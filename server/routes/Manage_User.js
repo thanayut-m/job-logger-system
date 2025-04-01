@@ -4,6 +4,7 @@ const {
   memberInfoPage,
   updateMember,
   createMember,
+  searchManageUser,
 } = require("../controllers/ManageUserControllers");
 const { isLogin } = require("../middlewares/AuthMiddleware");
 
@@ -13,7 +14,7 @@ router.get("/memberInfo", isLogin, memberInfo);
 router.post("/memberInfoPage", isLogin, memberInfoPage);
 router.put("/updateMember", isLogin, updateMember);
 router.post("/createMember", isLogin, createMember);
-// router.post("/memberInfo", isLogin, memberInfo);
+router.get("/searchManageUser", isLogin, searchManageUser);
 // router.put("/memberInfo", isLogin, memberInfo);
 // router.delete("/memberInfo", isLogin, memberInfo);
 
