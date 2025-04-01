@@ -18,7 +18,8 @@ const CardTitleManageUser = ({
     openModal,
     handleOpen,
     handleClose,
-    menuItems
+    menuItems,
+    fetchData
 }) => {
     const { register, handleSubmit, reset, formState } = useForm({
         resolver: zodResolver(signUpSchema)
@@ -43,18 +44,15 @@ const CardTitleManageUser = ({
                 })
                 reset();
                 handleClose();
+                fetchData();
             }
-
-
         } catch (err) {
             console.log("Error : " + err);
             return null;
         }
     }
 
-
     return (
-
         <div className="bg-white rounded-xl shadow-2xl p-3">
             <div className="flex justify-between" >
                 <div> จัดการผู้ใช้งาน</div>

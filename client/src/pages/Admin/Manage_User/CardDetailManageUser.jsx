@@ -32,12 +32,12 @@ const { VITE_API_PATH } = import.meta.env
 
 const CardDetailManageUser = ({
     menuItems,
+    manageUserInfo,
 }) => {
     const { register, reset, handleSubmit } = useForm();
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [manageUserInfo, setManageUserInfo] = useState([]);
 
     const [openModal, setOpenModal] = useState(null);
     const [selectUser, setSelectUser] = useState(null)
@@ -62,14 +62,6 @@ const CardDetailManageUser = ({
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-
-    const fetchData = async () => {
-        ManageUserInfo(setManageUserInfo);
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     const handleSaveManageUsers = async (data) => {
         try {
