@@ -3,10 +3,11 @@ import CardDetailManageUser from "./CardDetailManageUser"
 import CardTitleManageUser from "./CardTitleManageUser"
 import { ManageUserInfo } from "../../../functions/member";
 import { useForm } from "react-hook-form";
+import PropTypes from 'prop-types';
 
-const ManageUser = (
+const ManageUser = ({
     userID
-) => {
+}) => {
     const { register, watch } = useForm();
     const searchValue = watch("searchManage", "");
     const [openModal, setOpenModal] = useState(null);
@@ -39,6 +40,8 @@ const ManageUser = (
         { value: "person", name: "sa" },
     ];
 
+    console.log(userID)
+
     return (
         <div className="flex flex-col gap-3">
             <CardTitleManageUser
@@ -59,4 +62,10 @@ const ManageUser = (
         </div>
     )
 }
+
+ManageUser.propTypes = {
+    userID: PropTypes.string,
+};
+
+
 export default ManageUser

@@ -202,6 +202,7 @@ const CardDetailManageUser = ({
                         menuItems={menuItems}
                         register={register}
                         row={selectUser}
+                        userID={userID}
                     />}
                     footerModal={<Footer
                         onClick={handleSubmit(handleSaveManageUsers)}
@@ -266,6 +267,7 @@ CardDetailManageUser.propTypes = {
     ).isRequired,
     register: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired,
+    userID: PropTypes.string,
 };
 
 export default CardDetailManageUser;

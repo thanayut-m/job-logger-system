@@ -8,7 +8,6 @@ const Detail = ({
     row,
     userID
 }) => {
-    console.log(`user_id : ${userID}`)
     return (
         <div className="grid grid-cols-2 gap-3">
             <div className="grid col-span-2 gap-3">
@@ -41,6 +40,7 @@ const Detail = ({
                     name="role"
                     menuItems={menuItems}
                     defaultValue={row?.role}
+                    disabled={row?.user_id === userID}
                 >
                     ตำแหน่ง
                 </Selects>
@@ -66,6 +66,8 @@ Detail.propTypes = {
         user_id: PropTypes.string,
     }),
     reset: PropTypes.func.isRequired,
+    userID: PropTypes.string,
+    disabled: PropTypes.bool,
 };
 
 export default Detail

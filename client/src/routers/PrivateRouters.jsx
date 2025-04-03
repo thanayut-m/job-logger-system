@@ -48,6 +48,7 @@ const PrivateRouters = ({
 PrivateRouters.propTypes = {
     role: PropTypes.string,
     fullname: PropTypes.string,
+    userID: PropTypes.string,
 };
 
 PrivateRouters.defaultProps = {
