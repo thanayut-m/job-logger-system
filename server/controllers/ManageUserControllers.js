@@ -122,25 +122,22 @@ exports.createMember = async (req, res) => {
 exports.searchManageUser = async (req, res) => {
   try {
     console.log("search");
-    const { username, first_name, last_name } = req.query;
+    const { searchManage } = req.query;
+    const searchQuery = searchManage?.trim();
 
     const result = await prisma.user.findMany({
-      where:
-        username || first_name || last_name
-          ? {
-              OR: [
-                username
-                  ? { username: { contains: username, mode: "insensitive" } }
-                  : {},
-                first_name
-                  ? { firstName: { contains: first_name, mode: "insensitive" } }
-                  : {},
-                last_name
-                  ? { lastName: { contains: last_name, mode: "insensitive" } }
-                  : {},
-              ],
-            }
-          : {},
+      where: searchQuery
+        ? {
+            OR: [
+              { username: { contains: searchQuery, mode: "insensitive" } },
+              { first_name: { contains: searchQuery, mode: "insensitive" } },
+              { last_name: { contains: searchQuery, mode: "insensitive" } },
+            ],
+          }
+        : undefined,
+      orderBy: {
+        username: "asc",
+      },
     });
 
     res.status(200).json({
