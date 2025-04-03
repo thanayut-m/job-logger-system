@@ -114,6 +114,16 @@ const CardDetailManageUser = ({
 
     const handleStatus = async (data, row) => {
         try {
+            if (userID === row.user_id) {
+                Swal.fire({
+                    title: "Error",
+                    icon: "error",
+                    text: "You cannot change your own status!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+                return;
+            }
             const res = await axios.put(VITE_API_PATH + `/Manage_User/updateStatus`,
                 {
                     user_id: row.user_id,
@@ -160,7 +170,9 @@ const CardDetailManageUser = ({
                                         <TableCell align="center">{index + 1 + page * rowsPerPage}</TableCell>
                                         <TableCell align="center">{row.username}</TableCell>
                                         <TableCell align="center">{`${row.first_name} ${row.last_name}`}</TableCell>
-                                        <TableCell align="center">{row.role}</TableCell>
+                                        <TableCell align="center">
+                                            {row.role === "admin" ? "ผู้ดูแลระบบ" : "พนักงาน"}
+                                        </TableCell>
                                         <TableCell align="center">
                                             <Switches
                                                 register={register}
