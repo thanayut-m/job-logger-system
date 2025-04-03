@@ -6,7 +6,9 @@ const Detail = ({
     register,
     menuItems,
     row,
+    userID
 }) => {
+    console.log(`user_id : ${userID}`)
     return (
         <div className="grid grid-cols-2 gap-3">
             <div className="grid col-span-2 gap-3">

@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod/src/zod.js";
 import { signUpSchema } from "../../../utils/Schema";
 import axios from "axios";
 import { api } from "../../../functions/Api";
+import Input from "../../../components/MUI/Input";
 
 
 const { VITE_API_PATH } = import.meta.env
@@ -19,9 +20,10 @@ const CardTitleManageUser = ({
     handleOpen,
     handleClose,
     menuItems,
-    fetchData
+    fetchData,
+    register
 }) => {
-    const { register, handleSubmit, reset, formState } = useForm({
+    const { handleSubmit, reset, formState } = useForm({
         resolver: zodResolver(signUpSchema)
     });
 
@@ -30,7 +32,10 @@ const CardTitleManageUser = ({
 
     const handleSaveUsers = async (data) => {
         try {
-            const res = await axios.post(VITE_API_PATH + `/Manage_User/createMember`, data, api.headers())
+            const res = await axios.post(VITE_API_PATH + `/Manage_User/createMember`,
+                data,
+                { headers: api.headers() }
+            )
             const message = res.data.message
 
             console.log(message)
@@ -56,7 +61,13 @@ const CardTitleManageUser = ({
         <div className="bg-white rounded-xl shadow-2xl p-3">
             <div className="flex justify-between" >
                 <div> จัดการผู้ใช้งาน</div>
-                <div className='bg-blue-500 hover:bg-blue-400 hover:text-white rounded-xl gap2 flex flex-row items-center'>
+                <div className='grid grid-cols-2 gap-3 items-center'>
+                    <Input
+                        register={register}
+                        name="searchManage"
+                        type="text"
+                        label="Search"
+                    />
                     <Buttons
                         variant="contained"
                         backgroundColor="#FF9900"

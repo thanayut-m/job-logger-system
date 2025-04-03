@@ -8,6 +8,7 @@ const AppRouters = () => {
     const [role, setRole] = useState("");
     const [loading, setLoading] = useState(true);
     const [fullName, setFullName] = useState("")
+    const [userID, setUserId] = useState("")
 
 
     const location = useLocation();
@@ -29,9 +30,9 @@ const AppRouters = () => {
                 setRole(res?.data?.role ?? "");
                 const fullName = res?.data?.first_name + " " + res?.data?.last_name;
                 setFullName(fullName);
+                setUserId(res?.data.user_id ?? "")
                 // console.log("AppRouters : " + fullName)
             }
-
         } catch (err) {
             console.error("Token Invalid:", err);
             setRole("");
@@ -62,6 +63,7 @@ const AppRouters = () => {
                     element={<PrivateRouters
                         role={role}
                         fullname={fullName}
+                        userID={userID}
                     />}
                 />
 

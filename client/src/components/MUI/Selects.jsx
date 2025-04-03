@@ -11,7 +11,8 @@ const Selects = ({
     register,
     name,
     id,
-    defaultValue
+    defaultValue,
+    disabled
 }) => {
     return (
         <Box sx={{ minWidth: "120" }}>
@@ -23,7 +24,7 @@ const Selects = ({
                     labelId="demo-simple-select-label"
                     defaultValue={defaultValue}
                     label={children}
-
+                    disabled={disabled}
                 >
                     {menuItems.map((items) => (
                         <MenuItem key={items.value} value={items.value}>

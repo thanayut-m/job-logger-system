@@ -121,31 +121,36 @@ exports.createMember = async (req, res) => {
 
 exports.searchManageUser = async (req, res) => {
   try {
-    console.log("search");
-    const { searchManage } = req.query;
-    const searchQuery = searchManage?.trim();
+    const { searchValue } = req.query;
+    const searchQuery = searchValue || "".trim();
+
+    console.log(`Test2 : ${searchQuery}`);
+
+    const whereCondition = searchQuery
+      ? {
+          OR: [
+            { username: { contains: searchQuery, mode: "insensitive" } },
+            { first_name: { contains: searchQuery, mode: "insensitive" } },
+            { last_name: { contains: searchQuery, mode: "insensitive" } },
+          ],
+        }
+      : {};
 
     const result = await prisma.user.findMany({
-      where: searchQuery
-        ? {
-            OR: [
-              { username: { contains: searchQuery, mode: "insensitive" } },
-              { first_name: { contains: searchQuery, mode: "insensitive" } },
-              { last_name: { contains: searchQuery, mode: "insensitive" } },
-            ],
-          }
-        : undefined,
-      orderBy: {
-        username: "asc",
-      },
+      where: whereCondition,
+      orderBy: { username: "asc" },
     });
 
     res.status(200).json({
       message: "success",
-      result: result,
+      result,
     });
   } catch (err) {
-    console.error("Error:", err);
-    res.status(500).json({ error: "Server Error!", details: err.message });
+    console.error("Error searching users:", err);
+
+    res.status(500).json({
+      error: "Server Error!",
+      details: err?.message || "Something went wrong.",
+    });
   }
 };

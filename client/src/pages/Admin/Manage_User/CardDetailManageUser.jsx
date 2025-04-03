@@ -12,7 +12,7 @@ import LockResetIcon from '@mui/icons-material/LockReset';
 import Switches from '../../../components/MUI/switches';
 import { format } from "date-fns";
 import { th } from "date-fns/locale";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import Modals from '../../../components/MUI/Modals';
 import Title from './ModalManageUsers/Title';
@@ -22,7 +22,6 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { api } from '../../../functions/Api';
 import Swal from 'sweetalert2';
-import { ManageUserInfo } from '../../../functions/member';
 import Title_ResetPassword from './ModalResetPassword/Title_ResetPassword';
 import Detail_ResetPassword from './ModalResetPassword/Detail_ResetPassword';
 import Footer_ResetPassword from './ModalResetPassword/Footer_ResetPassword';
@@ -33,6 +32,8 @@ const { VITE_API_PATH } = import.meta.env
 const CardDetailManageUser = ({
     menuItems,
     manageUserInfo,
+    fetchData,
+    userID
 }) => {
     const { register, reset, handleSubmit } = useForm();
 
@@ -62,11 +63,13 @@ const CardDetailManageUser = ({
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-
     const handleSaveManageUsers = async (data) => {
         try {
             console.log(data)
-            const res = await axios.put(VITE_API_PATH + `/Manage_User/updateMember`, data, api.headers());
+            const res = await axios.put(VITE_API_PATH + `/Manage_User/updateMember`,
+                data,
+                { headers: api.headers() });
+
             console.log(res)
 
             if (res.data.message === 'success') {
@@ -107,6 +110,8 @@ const CardDetailManageUser = ({
             return null;
         }
     }
+
+    console.log(userID)
 
     return (
         <div>

@@ -7,7 +7,8 @@ import ManageUser from "../pages/Admin/Manage_User/Manage_User";
 
 const PrivateRouters = ({
     role,
-    fullname
+    fullname,
+    userID
 }) => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
@@ -38,7 +39,7 @@ const PrivateRouters = ({
                 {(role === "admin" || role === "person") && <Route path="dashboard" element={<Dashboard />} />}
 
                 {/* admin */}
-                {role === "admin" && <Route path="manage-user" element={<ManageUser />} />}
+                {role === "admin" && <Route path="manage-user" element={<ManageUser userID={userID} />} />}
 
             </Routes>
         </PrivateLayouts>

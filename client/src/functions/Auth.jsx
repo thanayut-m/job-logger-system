@@ -1,5 +1,6 @@
 import axios from "axios";
 import Swal from 'sweetalert2'
+import { api } from "./Api";
 
 const { VITE_API_PATH, VITE_SET_TOKEN } = import.meta.env
 
@@ -43,15 +44,12 @@ export const signIn = async (data, navigate) => {
 
 }
 
-export const currenUser = async (isToken) => {
+export const currenUser = async () => {
     try {
         // console.log("Token" + isToken);
         const res = await axios.get(VITE_API_PATH + "/auth/current-user", {
-            headers: {
-                Authorization: "Bearer " + isToken,
-            }
+            headers: api.headers()
         })
-        // console.log(res.data);
         return res.data
     } catch (err) {
         console.log(err);
