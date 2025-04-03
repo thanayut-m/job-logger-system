@@ -63,6 +63,7 @@ const CardDetailManageUser = ({
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
     const handleSaveManageUsers = async (data) => {
         try {
             console.log(data)
@@ -111,7 +112,25 @@ const CardDetailManageUser = ({
         }
     }
 
-    console.log(userID)
+    const handleStatus = async (data, row) => {
+        try {
+            const res = await axios.put(VITE_API_PATH + `/Manage_User/updateStatus`,
+                {
+                    user_id: row.user_id,
+                    status: !row.status
+                },
+                {
+                    headers: api.headers()
+                })
+            if (res.data.message === 'success') {
+                // console.log(res.data)
+                fetchData();
+            }
+        } catch (err) {
+            console.log("Error : " + err);
+            return null;
+        }
+    }
 
     return (
         <div>
@@ -143,7 +162,12 @@ const CardDetailManageUser = ({
                                         <TableCell align="center">{`${row.first_name} ${row.last_name}`}</TableCell>
                                         <TableCell align="center">{row.role}</TableCell>
                                         <TableCell align="center">
-                                            <Switches checked={Boolean(row.status)} />
+                                            <Switches
+                                                register={register}
+                                                name="status"
+                                                onClick={() => handleSubmit(handleStatus)(row)}
+                                                checked={Boolean(row.status)}
+                                            />
                                         </TableCell>
                                         <TableCell align="center">
                                             {row.users_update_at

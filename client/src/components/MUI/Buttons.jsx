@@ -36,6 +36,8 @@ Buttons.propTypes = {
     backgroundColor: PropTypes.string,
     hoverBackgroundColor: PropTypes.string,
     onClick: PropTypes.func,
+    disabled: PropTypes.bool,
+    type: PropTypes.string
 }
 
 export default Buttons

@@ -154,3 +154,44 @@ exports.searchManageUser = async (req, res) => {
     });
   }
 };
+
+exports.updateStatus = async (req, res) => {
+  try {
+    let { user_id, status } = req.body;
+
+    if (!user_id || status === undefined) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    user_id = Number(user_id);
+
+    if (isNaN(user_id)) {
+      return res.status(400).json({ error: "User ID must be a valid number" });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { user_id: user_id },
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const result = await prisma.user.update({
+      where: { user_id: user_id },
+      data: { status: status },
+    });
+
+    res.status(200).json({
+      message: "success",
+      result: result,
+    });
+  } catch (err) {
+    console.error("Error searching users:", err);
+
+    res.status(500).json({
+      error: "Server Error!",
+      details: err?.message || "Something went wrong.",
+    });
+  }
+};

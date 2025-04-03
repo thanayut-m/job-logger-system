@@ -2,18 +2,24 @@ import { Switch } from '@mui/material';
 import PropTypes from 'prop-types';
 
 const Switches = ({
-    checked
+    checked,
+    onClick,
+    name,
+    register
 }) => {
     return (
         <Switch
+            {...register(name)}
             checked={checked}
-            // onChange={handleChange}
-            inputProps={{ 'aria-label': 'controlled' }}
+            onClick={onClick}
         />
     )
 }
 
 Switches.propTypes = {
-    checked: PropTypes.func.isRequired
+    checked: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
+    register: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
 }
 export default Switches
