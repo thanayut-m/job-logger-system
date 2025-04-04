@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import DrawerList from './DrawerList';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { FaUserCog } from 'react-icons/fa';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const Drawers = ({
     toggleDrawer,
     role
 }) => {
-    const menuItems = [
+    const navigation = [
         {
             to: "/private/dashboard",
             Icon: AiOutlineDashboard,
@@ -17,23 +18,28 @@ const Drawers = ({
     ];
 
     if (role === 'admin') {
-        menuItems.push(
+        navigation.push(
             {
-                to: "/private/manage-user",
-                Icon: FaUserCog,
-                textName: "ตั้งค่าผู้ใช้"
+                Icon: SettingsIcon,
+                textName: "ตั้งค่าระบบ",
+                children: [
+                    {
+                        to: "/private/manage-user",
+                        Icon: FaUserCog,
+                        textName: "ผู้ใช้ทั้งหมด"
+                    },
+                ]
             },
         );
     }
 
     return (
-        <Box sx={{ width: 300 }} role="presentation" onClick={() => toggleDrawer(false)}>
-            {menuItems.map((item, index) => (
+        <Box sx={{ width: 300 }} role="presentation">
+            {navigation.map((item, index) => (
                 <DrawerList
                     key={index}
-                    textName={item.textName}
-                    to={item.to}
-                    Icon={item.Icon}
+                    {...item}
+                    toggleDrawer={toggleDrawer}
                 />
             ))}
         </Box>
