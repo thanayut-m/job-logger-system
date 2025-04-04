@@ -4,6 +4,12 @@ import DrawerList from './DrawerList';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { FaUserCog } from 'react-icons/fa';
 import SettingsIcon from '@mui/icons-material/Settings';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import DescriptionIcon from '@mui/icons-material/Description';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
+import InventorySharpIcon from '@mui/icons-material/InventorySharp';
+
 
 const Drawers = ({
     toggleDrawer,
@@ -14,6 +20,17 @@ const Drawers = ({
             to: "/private/dashboard",
             Icon: AiOutlineDashboard,
             textName: "Dashboard"
+        },
+        {
+            Icon: BarChartIcon,
+            textName: "Report",
+            children: [
+                {
+                    to: "/private/Report",
+                    Icon: DescriptionIcon,
+                    textName: "รายงานปัญหา"
+                }
+            ]
         },
     ];
 
@@ -27,6 +44,21 @@ const Drawers = ({
                         to: "/private/manage-user",
                         Icon: FaUserCog,
                         textName: "ผู้ใช้ทั้งหมด"
+                    },
+                    {
+                        to: "/private/hospital",
+                        Icon: LocalHospitalIcon,
+                        textName: "โรงพยาบาล"
+                    },
+                    {
+                        to: "/private/Channels",
+                        Icon: PhonelinkSetupIcon,
+                        textName: "ช่องทางการติดต่อ"
+                    },
+                    {
+                        to: "/private/la-Support",
+                        Icon: InventorySharpIcon,
+                        textName: "LA Support"
                     },
                 ]
             },
