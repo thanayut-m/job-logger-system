@@ -15,7 +15,7 @@ model User {
   last_name        String
   role             String      @default("person")
   status           Boolean
-  users_update_at  DateTime    @updatedAt
+  users_update_at  DateTime
   users_created_at DateTime    @default(now())
   todo_orders      TodoOrder[] @relation("UserTodos")
   approved_todos   TodoOrder[] @relation("UserApprovals")

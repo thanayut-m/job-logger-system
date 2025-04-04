@@ -124,8 +124,6 @@ exports.searchManageUser = async (req, res) => {
     const { searchValue } = req.query;
     const searchQuery = searchValue || "".trim();
 
-    console.log(`Test2 : ${searchQuery}`);
-
     const whereCondition = searchQuery
       ? {
           OR: [

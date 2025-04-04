@@ -36,8 +36,8 @@ const ManageUser = ({
 
 
     const menuItems = [
-        { value: "admin", name: "mgr" },
-        { value: "person", name: "sa" },
+        { value: "admin", name: "หัวหน้างาน" },
+        { value: "person", name: "พนักงาน" },
     ];
 
     return (

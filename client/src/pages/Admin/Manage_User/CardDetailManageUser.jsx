@@ -171,7 +171,7 @@ const CardDetailManageUser = ({
                                         <TableCell align="center">{row.username}</TableCell>
                                         <TableCell align="center">{`${row.first_name} ${row.last_name}`}</TableCell>
                                         <TableCell align="center">
-                                            {row.role === "admin" ? "ผู้ดูแลระบบ" : "พนักงาน"}
+                                            {row.role === "admin" ? "หัวหน้างาน" : "พนักงาน"}
                                         </TableCell>
                                         <TableCell align="center">
                                             <Switches
