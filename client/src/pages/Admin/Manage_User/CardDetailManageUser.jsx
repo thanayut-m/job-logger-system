@@ -118,7 +118,7 @@ const CardDetailManageUser = ({
                 Swal.fire({
                     title: "Error",
                     icon: "error",
-                    text: "You cannot change your own status!",
+                    text: "You cannot change         s!",
                     showConfirmButton: false,
                     timer: 1500,
                 })

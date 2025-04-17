@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import { useEffect, useState } from "react";
 import PrivateLayouts from "../Layouts/PrivateLayouts";
 import ManageUser from "../pages/Admin/Manage_User/Manage_User";
+import Hospitals from './../pages/Admin/Hospitals/Hospitals';
 
 const PrivateRouters = ({
     role,
@@ -39,8 +40,12 @@ const PrivateRouters = ({
                 {(role === "admin" || role === "person") && <Route path="dashboard" element={<Dashboard />} />}
 
                 {/* admin */}
-                {role === "admin" && <Route path="manage-user" element={<ManageUser userID={userID} />} />}
-
+                {role === "admin" && (
+                    <>
+                        <Route path="manage-user" element={<ManageUser userID={userID} />} />
+                        <Route path="hospital" element={<Hospitals />} />
+                    </>
+                )}
             </Routes>
         </PrivateLayouts>
     )
