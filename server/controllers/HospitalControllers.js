@@ -4,9 +4,9 @@ const prisma = new PrismaClient();
 
 exports.hospitalInfo = async (req, res) => {
   try {
-    const { hospital_name } = req.body;
-    console.log(hospital_name);
-    const searchQuery = hospital_name || "".trim();
+    const { searchValue } = req.query;
+    console.log(searchValue);
+    const searchQuery = searchValue || "".trim();
 
     const whereCondition = searchQuery
       ? {

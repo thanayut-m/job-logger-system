@@ -12,7 +12,6 @@ import axios from "axios";
 import { api } from "../../../functions/Api";
 import Input from "../../../components/MUI/Input";
 
-
 const { VITE_API_PATH } = import.meta.env
 
 const CardTitleManageUser = ({
@@ -62,7 +61,12 @@ const CardTitleManageUser = ({
             <div className="flex justify-between" >
                 <div> จัดการผู้ใช้งาน</div>
                 <div className='grid grid-cols-2 gap-3 items-center'>
- 
+                    <Input
+                        register={register}
+                        name="searchManage"
+                        type="text"
+                        label="Search"
+                    />
                     <Buttons
                         variant="contained"
                         backgroundColor="#FF9900"

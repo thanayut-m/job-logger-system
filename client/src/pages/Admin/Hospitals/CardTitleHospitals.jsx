@@ -1,6 +1,7 @@
-import { Input } from "@mui/material";
+
 import Buttons from "../../../components/MUI/Buttons";
 import PropTypes from 'prop-types';
+import Input from "../../../components/MUI/Input";
 
 const CardTitleHospitals = ({
     register
@@ -13,7 +14,7 @@ const CardTitleHospitals = ({
                     <div className='grid grid-cols-2 gap-3 items-center'>
                         <Input
                             register={register}
-                            name="searchManage"
+                            name="hospital_name"
                             type="text"
                             label="Search"
                         />
