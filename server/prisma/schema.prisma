@@ -51,7 +51,8 @@ model TodoOrder {
 model Hospital {
   hospital_id   Int         @id @default(autoincrement())
   hospital_name String
-  hospital_date DateTime    @default(now())
+  hospital_status Boolean 
+  hospital_date DateTime 
   todo_orders   TodoOrder[]
 }
 

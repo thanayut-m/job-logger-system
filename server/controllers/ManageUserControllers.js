@@ -136,7 +136,7 @@ exports.searchManageUser = async (req, res) => {
 
     const result = await prisma.user.findMany({
       where: whereCondition,
-      orderBy: { username: "asc" },
+      orderBy: { role: "asc" },
     });
 
     res.status(200).json({
