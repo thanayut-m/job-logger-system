@@ -1,5 +1,4 @@
 import { z } from "zod";
-
 export const signUpSchema = z.object({
     first_name: z.string().min(1, "กรุณากรอกชื่อ"),
     last_name: z.string().min(1, "กรุณากรอกนามสกุล"),
@@ -18,3 +17,10 @@ export const signinSchema = z.object({
     username: z.string().min(1, "กรุณากรอกชื่อผู้ใช้"),
     password: z.string().min(6, "กรุณากรอกรหัสผ่าน")
 })
+
+
+export const HospitalsSchema = z.object({
+    hospital_name: z
+        .string()
+        .min(1, "กรุณากรอกชื่อโรงพยาบาล"),
+});
