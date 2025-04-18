@@ -7,12 +7,13 @@ import Footer_CreateUsers from "./ModalCreateUsers/Footer_CreateUsers";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { zodResolver } from "@hookform/resolvers/zod/src/zod.js";
-import { signUpSchema } from "../../../utils/Schema";
 import axios from "axios";
 import { api } from "../../../functions/Api";
 import Input from "../../../components/MUI/Input";
 
 const { VITE_API_PATH } = import.meta.env
+import { signUpSchema } from './../../../utils/Schema';
+
 
 const CardTitleManageUser = ({
     openModal,
@@ -20,13 +21,13 @@ const CardTitleManageUser = ({
     handleClose,
     menuItems,
     fetchData,
-    register
+
 }) => {
-    const { handleSubmit, reset, formState } = useForm({
+    const { handleSubmit, register, reset, formState } = useForm({
         resolver: zodResolver(signUpSchema)
     });
 
-    const { errors } = formState
+    const { errors } = signUpSchema
     console.log(errors);
 
     const handleSaveUsers = async (data) => {
