@@ -1,4 +1,5 @@
 import Input from "../../../../components/MUI/Input"
+import PropTypes from 'prop-types';
 
 const Detail_CreateHospitals = ({
     register,
@@ -17,4 +18,10 @@ const Detail_CreateHospitals = ({
         </div>
     )
 }
+Detail_CreateHospitals.propTypes = {
+    register: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
+}
+
+
 export default Detail_CreateHospitals

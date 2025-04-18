@@ -75,8 +75,8 @@ CardTitleHospitals.propTypes = {
     handleClose: PropTypes.func.isRequired,
     openModal: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
-    onClick: PropTypes.func.isRequired
-
+    onClick: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
 }
 
 export default CardTitleHospitals
