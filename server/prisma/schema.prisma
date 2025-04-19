@@ -74,6 +74,7 @@ model TodoImage {
 model TodoChannels {
   todo_Channels_id   Int         @id @default(autoincrement())
   todo_Channels_name String
+  todo_Channels_status Boolean   @default(false)
   todo_Channels_date DateTime    @default(now())
   todo_orders        TodoOrder[]
 }

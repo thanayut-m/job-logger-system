@@ -51,7 +51,7 @@ const Drawers = ({
                         textName: "โรงพยาบาล"
                     },
                     {
-                        to: "/private/Channels",
+                        to: "/private/channel",
                         Icon: PhonelinkSetupIcon,
                         textName: "ช่องทางการติดต่อ"
                     },
