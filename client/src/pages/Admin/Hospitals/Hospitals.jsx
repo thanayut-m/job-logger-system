@@ -1,23 +1,26 @@
 import { useForm } from "react-hook-form"
 import CardDetailHospitals from "./CardDetailHospitals"
 import CardTitleHospitals from "./CardTitleHospitals"
-import { useCallback, useEffect, useState } from "react";
-import { CreateHospitals, HospitalInfo } from "../../../functions/hospitals";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { ChangeHospitals, CreateHospitals, HandleStatusHospital, HospitalInfo } from "../../../functions/hospitals";
 import { zodResolver } from "@hookform/resolvers/zod/src/zod.js";
 import { HospitalsSchema } from "../../../utils/Schema";
 
 const Hospitals = () => {
-  const { register, watch, reset, handleSubmit, formState, setError } = useForm({
-    resolver: zodResolver(HospitalsSchema),
-  });
-
-  const searchValue = watch("searchValue", "");
   const [hospitalInfo, setHospitalInfo] = useState([]);
   const [openModal, setOpenModal] = useState(null);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [oldName, setOldName] = useState("");
 
+  const schema = useMemo(() => HospitalsSchema(oldName), [oldName]);
+
+  const { register, watch, reset, handleSubmit, formState, setError } = useForm({
+    resolver: zodResolver(schema),
+  });
 
   const { errors } = formState
-  console.log("errors:", errors);
+
+  const searchValue = watch("searchValue", "");
 
   const fetchDataHospital = useCallback(async () => {
     if (!searchValue.trim()) {
@@ -31,8 +34,18 @@ const Hospitals = () => {
     fetchDataHospital();
   }, [fetchDataHospital])
 
-  const handleOpen = (modal) => {
+  const handleOpen = (modal, user) => {
     setOpenModal(modal)
+    setSelectedRow(user)
+    setOldName(user.hospital_name);
+
+    setTimeout(() => {
+      reset({
+        hospital_name: user.hospital_name,
+        hospital_id: user.hospital_id,
+      });
+      setOpenModal(modal);
+    }, 0);
   }
 
   const handleClose = () => {
@@ -40,8 +53,16 @@ const Hospitals = () => {
   }
 
   const handleCreateHospitals = async (data) => {
-    // console.log(`handleCreateHospitals : ${data}`)
     CreateHospitals(data, reset, handleClose, fetchDataHospital, setError)
+  }
+
+
+  const handleChangeHospitals = async (data) => {
+    ChangeHospitals(data, reset, handleClose, fetchDataHospital, setError)
+  }
+
+  const handleStatusHospital = async (data) => {
+    HandleStatusHospital(data, fetchDataHospital)
   }
 
   return (
@@ -57,7 +78,17 @@ const Hospitals = () => {
         errors={errors}
       />
       <CardDetailHospitals
+        register={register}
         hospitalInfo={hospitalInfo}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        openModal={openModal}
+        selectedRow={selectedRow}
+        reset={reset}
+        errors={errors}
+        handleStatusHospital={handleStatusHospital}
+        handleChangeHospitals={handleChangeHospitals}
+        handleSubmit={handleSubmit}
       />
     </div>
   )

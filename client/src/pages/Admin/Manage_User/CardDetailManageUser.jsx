@@ -70,9 +70,6 @@ const CardDetailManageUser = ({
             const res = await axios.put(VITE_API_PATH + `/Manage_User/updateMember`,
                 data,
                 { headers: api.headers() });
-
-            console.log(res)
-
             if (res.data.message === 'success') {
                 Swal.fire({
                     title: "แก้ไขข้อมูลสำเร็จ",

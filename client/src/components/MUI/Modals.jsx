@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Buttons from './Buttons';
 import PropTypes from 'prop-types';
@@ -33,9 +32,10 @@ const Modals = ({
                     borderRadius: '16px',
                     display: 'flex',
                     flexDirection: 'column',
+                    outline: 'none',
 
                 }}>
-                    <Typography
+                    <Box
                         id="modal-modal-title"
                         variant="h6"
                         component="h2"
@@ -45,7 +45,7 @@ const Modals = ({
                         }}
                     >
                         {titleModal}
-                    </Typography>
+                    </Box>
                     <Box
                         id="modal-modal-description"
                         sx={{

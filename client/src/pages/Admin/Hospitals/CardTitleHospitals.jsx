@@ -18,10 +18,10 @@ const CardTitleHospitals = ({
 }) => {
     return (
         <div className="bg-white rounded-xl shadow-2xl p-3">
-            <div className="flex justify-between" >
-                <div>CardTitleHospitals</div>
+            <div className="flex justify-between items-center px-2" >
+                <div className="text-2xl font-semibold">โรงพยาบาล</div>
                 <div>
-                    <div className='grid grid-cols-2 gap-3 items-center'>
+                    <div className='grid grid-cols-2 gap-3  '>
                         <Input
                             register={register}
                             name="searchValue"

@@ -19,8 +19,14 @@ export const signinSchema = z.object({
 })
 
 
-export const HospitalsSchema = z.object({
-    hospital_name: z
-        .string()
-        .min(1, "กรุณากรอกชื่อโรงพยาบาล"),
-});
+export const HospitalsSchema = (oldName = "") =>
+    z.object({
+        hospital_name: z
+            .string()
+            .min(1, "กรุณากรอกชื่อโรงพยาบาล")
+            .refine((value) => value !== oldName, {
+                message: "กรุณาเปลี่ยนชื่อก่อนบันทึก",
+            }),
+        hospital_id: z.union([z.string(), z.number()]).optional(),
+    });
+

@@ -22,9 +22,9 @@ const ReusableTable = ({
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden', borderRadius: '16px' }}>
             <TableContainer>
-                <Table stickyHeader size="small">
+                <Table stickyHeader size="small" aria-label="sticky table ">
                     <TableHead>
-                        <TableRow>
+                        <TableRow >
                             {columns.map((column, index) => (
                                 <TableCell
                                     key={index}

@@ -38,7 +38,6 @@ export const CreateHospitals = async (
         )
 
         if (res.data.message === 'success') {
-            console.log("success")
             Swal.fire({
                 icon: "success",
                 title: "สร้างโรงพยาบาลสำเร็จ",
@@ -59,5 +58,69 @@ export const CreateHospitals = async (
         } else {
             console.log("Unknown error:", err.response?.data);
         }
+    }
+}
+
+export const ChangeHospitals = async (
+    data,
+    reset,
+    handleClose,
+    fetchDataHospital,
+    setError
+) => {
+    try {
+        const res = await axios.put(
+            VITE_API_PATH + `/hospitals/updateHospital`,
+            {
+                hospital_id: data.hospital_id,
+                hospital_name: data.hospital_name
+            },
+            { headers: api.headers() }
+        )
+
+        if (res.data.message === "success") {
+            Swal.fire({
+                icon: "success",
+                title: "แก้ไขสำเร็จ",
+                showConfirmButton: false,
+                timer: 1000
+            })
+            reset();
+            handleClose();
+            fetchDataHospital();
+        }
+    } catch (err) {
+        console.error("Error fetching hospitals info:", err);
+
+        if (err.response?.data?.error === 'Hospital is already in use') {
+            setError("hospital_name", {
+                type: "manual",
+                message: "ชื่อโรงพยาบาลนี้มีการใช้งานแล้ว",
+            });
+        } else {
+            console.log("Unknown error:", err.response?.data);
+        }
+    }
+}
+
+export const HandleStatusHospital = async (
+    data,
+    fetchDataHospital
+) => {
+    try {
+        const res = await axios.put(
+            VITE_API_PATH + `/hospitals/updateStatusHospital`,
+            {
+                Hospital_id: data.hospital_id,
+                Hospital_status: !data.hospital_status
+            },
+            { headers: api.headers }
+        )
+
+        if (res.data.message === "success") {
+            fetchDataHospital();
+        }
+    } catch (err) {
+        console.error("Error fetching hospitals info:", err);
     }
 }
