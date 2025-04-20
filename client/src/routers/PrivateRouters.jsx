@@ -6,6 +6,7 @@ import PrivateLayouts from "../Layouts/PrivateLayouts";
 import ManageUser from "../pages/Admin/Manage_User/Manage_User";
 import Hospitals from './../pages/Admin/Hospitals/Hospitals';
 import Channels from "../pages/Admin/Channels/Channels";
+import La_Support from "../pages/Admin/La_Support/La_Support";
 
 const PrivateRouters = ({
     role,
@@ -46,6 +47,7 @@ const PrivateRouters = ({
                         <Route path="manage-user" element={<ManageUser userID={userID} />} />
                         <Route path="hospital" element={<Hospitals />} />
                         <Route path="channel" element={<Channels />} />
+                        <Route path="la-Support" element={<La_Support />} />
                     </>
                 )}
             </Routes>
