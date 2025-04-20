@@ -59,6 +59,7 @@ model Hospital {
 model TodoLaSupport {
   todo_la_Support_id   Int         @id @default(autoincrement())
   todo_la_Support_name String
+  todo_la_Support_status Boolean   @default(false)
   todo_la_Support_date DateTime    @default(now())
   todo_orders          TodoOrder[]
 }
