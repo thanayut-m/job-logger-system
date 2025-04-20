@@ -30,11 +30,14 @@ export const HospitalsSchema = (oldName = "") =>
         hospital_id: z.union([z.string(), z.number()]).optional(),
     });
 
-export const ChannelSchema = z.object({
-    channel_name: z.string().min(1, "กรุณากรอกชื่อช่องทางการติดต่อ")
-    //     .refine((value) => value !== oldName, {
-    //         message: "กรุณาเปลี่ยนชื่อก่อนบันทึก",
-    //     }),
-    // hospital_id: z.union([z.string(), z.number()]).optional(),
-});
+export const ChannelSchema = (oldName = "") =>
+    z.object({
+        channel_name: z
+            .string()
+            .min(1, "กรุณากรอกข้อมูล")
+            .refine((value) => value !== oldName, {
+                message: "กรุณาเปลี่ยนชื่อก่อนบันทึก",
+            }),
+        channel_id: z.union([z.string(), z.number()]).optional(),
+    });
 

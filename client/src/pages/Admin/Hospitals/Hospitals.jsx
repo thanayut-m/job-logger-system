@@ -56,7 +56,6 @@ const Hospitals = () => {
     CreateHospitals(data, reset, handleClose, fetchDataHospital, setError)
   }
 
-
   const handleChangeHospitals = async (data) => {
     ChangeHospitals(data, reset, handleClose, fetchDataHospital, setError)
   }

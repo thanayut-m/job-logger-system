@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 exports.hospitalInfo = async (req, res) => {
   try {
     const { searchValue } = req.query;
-    console.log(searchValue);
+    // console.log(searchValue);
     const searchQuery = searchValue || "".trim();
 
     const whereCondition = searchQuery
@@ -107,8 +107,6 @@ exports.updateHospital = async (req, res) => {
 exports.updateStatusHospital = async (req, res) => {
   try {
     let { Hospital_id, Hospital_status } = req.body;
-    console.log(Hospital_id);
-    console.log(Hospital_status);
 
     if (!Hospital_id || Hospital_status === undefined) {
       return res.status(400).json({ error: "Missing required fields" });
