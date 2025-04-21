@@ -31,6 +31,7 @@ export const CreateLaSupport = async (
     data,
     handleClose,
     reset,
+    fetchDataLaSupport,
     setError
 ) => {
     try {
@@ -50,6 +51,7 @@ export const CreateLaSupport = async (
             })
             reset();
             handleClose();
+            fetchDataLaSupport();
         }
     } catch (err) {
         console.error("Error fetching La Support info:", err);

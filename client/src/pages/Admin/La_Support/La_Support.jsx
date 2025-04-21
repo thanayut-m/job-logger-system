@@ -54,7 +54,7 @@ const La_Support = () => {
     }
 
     const handleCreateLaSupport = async (data) => {
-        CreateLaSupport(data, handleClose, reset, setError);
+        CreateLaSupport(data, handleClose, reset,fetchDataLaSupport, setError);
     }
 
     const handleStatusLaSupport = async (data) => {

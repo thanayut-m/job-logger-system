@@ -36,7 +36,7 @@ const CardTitleLaSupport = ({
                                 handleOpen("createLaSupport");
                             }}
                         >
-                            เพิ่มโรงพยาบาล
+                            เพิ่มหมวดหมู่
                         </Buttons>
                     </div>
                 </div>
