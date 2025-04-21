@@ -8,7 +8,9 @@ const Buttons = ({
     hoverBackgroundColor,
     onClick,
     disabled,
-    type
+    type,
+    minWidth,
+    minHeight
 }) => {
     return (
         <Button
@@ -21,7 +23,8 @@ const Buttons = ({
                 color: "white",
                 "&:hover": { backgroundColor: hoverBackgroundColor },
                 py: 1,
-                minWidth: 40
+                minWidth: { minWidth },
+                minHeight: { minHeight }
             }}
 
         >
@@ -37,7 +40,9 @@ Buttons.propTypes = {
     hoverBackgroundColor: PropTypes.string,
     onClick: PropTypes.func,
     disabled: PropTypes.bool,
-    type: PropTypes.string
+    type: PropTypes.string,
+    minWidth: PropTypes.string,
+    minHeight: PropTypes.string
 }
 
 export default Buttons

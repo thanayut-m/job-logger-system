@@ -32,8 +32,15 @@ const CardTitleManageUser = ({
 
     const handleSaveUsers = async (data) => {
         try {
+            console.log(data)
             const res = await axios.post(VITE_API_PATH + `/Manage_User/createMember`,
-                data,
+                {
+                    username: data.username,
+                    first_name: data.first_name,
+                    last_name: data.last_name,
+                    password: data.password,
+                    role: data.role
+                },
                 { headers: api.headers() }
             )
             const message = res.data.message

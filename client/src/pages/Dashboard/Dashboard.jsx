@@ -1,13 +1,15 @@
 
 import CardTitle from "./CardTitle";
-import CardDetail from "./CardDetail";
+import CardDetailDashboard from "./CardDetailDashboard";
+import CardTitleDashboard from "./CardTitleDashboard";
 
 const Dashboard = () => {
 
     return (
         <div className="flex flex-col gap-3">
             <CardTitle />
-            <CardDetail />
+            <CardTitleDashboard />
+            <CardDetailDashboard />
         </div>
     )
 }

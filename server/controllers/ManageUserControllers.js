@@ -95,7 +95,7 @@ exports.createMember = async (req, res) => {
     });
 
     if (existingUser) {
-      res.status(400).json({ message: "User is already in use" });
+      return res.status(400).json({ message: "User is already in use" });
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
@@ -104,10 +104,11 @@ exports.createMember = async (req, res) => {
       data: {
         first_name: first_name,
         last_name: last_name,
+        username: username,
         password: hashPassword,
         role: role,
-        username: username,
         status: true,
+        users_update_at: new Date(),
       },
     });
     res.status(200).json({
