@@ -41,3 +41,14 @@ export const ChannelSchema = (oldName = "") =>
         channel_id: z.union([z.string(), z.number()]).optional(),
     });
 
+export const LaSupportSchema = (oldName = "") =>
+    z.object({
+        la_support_name: z
+            .string()
+            .min(1, "กรุณากรอกข้อมูล")
+            .refine((value) => value !== oldName, {
+                message: "กรุณาเปลี่ยนชื่อก่อนบันทึก",
+            }),
+        la_support_id: z.union([z.string(), z.number()]).optional(),
+    });
+

@@ -53,12 +53,16 @@ const CardDetailHospitals = ({
                 onPageChange={handleChangePage}
                 renderRow={(row, index) => (
                     <>
-                        <TableCell align="center">{page * rowsPerPage + index + 1}</TableCell>
-                        <TableCell align="center" >{row.hospital_name}</TableCell>
+                        <TableCell align="center">
+                            {page * rowsPerPage + index + 1}
+                        </TableCell>
+                        <TableCell align="center" >
+                            {row.hospital_name}
+                        </TableCell>
                         <TableCell align="center" >
                             <Switches
                                 register={register}
-                                name="hospital_status"
+                                name="Hospital_status"
                                 onClick={() => handleStatusHospital(row)}
                                 checked={Boolean(row.hospital_status)}
                             />

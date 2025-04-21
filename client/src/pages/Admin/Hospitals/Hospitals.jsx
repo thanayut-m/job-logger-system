@@ -50,6 +50,7 @@ const Hospitals = () => {
 
   const handleClose = () => {
     setOpenModal(null)
+    setSelectedRow(null)
   }
 
   const handleCreateHospitals = async (data) => {

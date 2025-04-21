@@ -1,7 +1,7 @@
+import PropTypes from "prop-types"
 import Buttons from "../../../../components/MUI/Buttons"
-import PropTypes from 'prop-types';
 
-const Footer_CreateHospitals = ({
+const Footer_ChangeLaSupport = ({
     onClick
 }) => {
     return (
@@ -13,8 +13,8 @@ const Footer_CreateHospitals = ({
         </Buttons>
     )
 }
-Footer_CreateHospitals.propTypes = {
-    onClick: PropTypes.func.isRequired
-}
 
-export default Footer_CreateHospitals
+Footer_ChangeLaSupport.propTypes = {
+    onClick: PropTypes.func.isRequired,
+}
+export default Footer_ChangeLaSupport

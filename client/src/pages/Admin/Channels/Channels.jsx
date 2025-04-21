@@ -36,6 +36,7 @@ const Channels = () => {
 
     const handleClose = () => {
         setOpenModal(null)
+        setSelectedRow(null)
     }
 
     const searchValue = watch("searchValue", "");
